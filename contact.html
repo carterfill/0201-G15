@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html">Sản Phẩm</a></li>
+                <li><a href="cart.html" class="nut-gio-hang">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
+                <li><a href="contact.html" class="dang-chon">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="khung-chua">
+        <div class="tieu-de-trang">
+            <h2>Góp Ý & Đặt Bánh Theo Yêu Cầu</h2>
+            <p>Để lại tin nhắn cho tiệm bánh Sweet Bakery nhé</p>
+        </div>
+
+        <div class="luoi-lien-he">
+            <div class="thong-tin-tiem">
+                <h3>Thông Tin Tiệm Bánh</h3>
+                <p>📍 <strong>Địa chỉ:</strong> 123 Đường Bánh Ngọt, P. Bến Nghé, Quận 1, TP.HCM</p>
+                <p>📞 <strong>Điện thoại:</strong> 0912.345.678</p>
+                <p>✉️ <strong>Email:</strong> sweetbakery@gmail.com</p>
+                <p>⏰ <strong>Giờ mở cửa:</strong> 07:00 - 21:30 hàng ngày</p>
+                <hr>
+                <p class="ghi-chu">💡 Tiệm có nhận làm bánh sinh nhật thiết kế riêng theo mẫu khách gửi qua Zalo trước 24 giờ.</p>
+            </div>
+
+            <div>
+                <form id="form-lien-he" class="form-nhap-lieu form-lien-he" onsubmit="guiLienHe(event)">
+                    <h3 class="tieu-de-form">Gửi Tin Nhắn Cho Tiệm</h3>
+
+                    <div class="hang-nhap">
+                        <label for="lh-ten">Họ và tên của bạn:</label>
+                        <input type="text" id="lh-ten" placeholder="Ví dụ: Trần Thị Mai" required>
+                    </div>
+
+                    <div class="hang-nhap">
+                        <label for="lh-email">Địa chỉ Email:</label>
+                        <input type="email" id="lh-email" placeholder="Ví dụ: mai@gmail.com" required>
+                    </div>
+
+                    <div class="hang-nhap">
+                        <label for="lh-tinnhan">Nội dung tin nhắn / Yêu cầu bánh:</label>
+                        <textarea id="lh-tinnhan" rows="4" placeholder="Nhập lời nhắn của bạn ở đây..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="nut-bam nut-gui-tin">
+                        Gửi Tin Nhắn Đi
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
+            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+            <p>Hotline đặt bánh: 0912.345.678</p>
+            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

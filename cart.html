@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html">Sản Phẩm</a></li>
+                <li><a href="cart.html" class="nut-gio-hang dang-chon">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="khung-chua">
+        <div class="tieu-de-trang">
+            <h2>Giỏ Hàng Của Bạn</h2>
+            <p>Kiểm tra lại các món bánh trước khi thanh toán</p>
+        </div>
+
+        <div id="khung-gio-hang">
+            <table class="bang-gio-hang">
+                <thead>
+                    <tr>
+                        <th>Tên Bánh</th>
+                        <th>Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody id="bang-gio-hang-body"></tbody>
+            </table>
+
+            <div class="khung-tong-tien">
+                Tổng Tiền Thanh Toán: <span id="tong-tien-gio-hang">0 đ</span>
+            </div>
+
+            <form class="form-nhap-lieu" onsubmit="datHang(event)">
+                <h3 class="tieu-de-form">Thông Tin Nhận Bánh</h3>
+
+                <div class="hang-nhap">
+                    <label for="dat-hang-hoten">Họ và tên của bạn:</label>
+                    <input type="text" id="dat-hang-hoten" placeholder="Ví dụ: Nguyễn Văn A" required>
+                </div>
+
+                <div class="hang-nhap">
+                    <label for="dat-hang-sdt">Số điện thoại:</label>
+                    <input type="tel" id="dat-hang-sdt" placeholder="Ví dụ: 0912345678" required>
+                </div>
+
+                <div class="hang-nhap">
+                    <label for="dat-hang-diachi">Địa chỉ nhận bánh:</label>
+                    <input type="text" id="dat-hang-diachi" placeholder="Số nhà, tên đường, quận/huyện..." required>
+                </div>
+
+                <button type="submit" class="nut-bam nut-dat-hang">
+                    Xác Nhận Đặt Hàng
+                </button>
+            </form>
+        </div>
+
+        <div id="gio-hang-trong" class="gio-hang-trong">
+            <p class="bieu-tuong">🛒</p>
+            <h3>Giỏ hàng của bạn đang trống!</h3>
+            <p>Hãy chọn vài chiếc bánh ngon cho hôm nay nhé.</p>
+            <a href="products.html" class="nut-bam">Đi Chọn Bánh Ngay</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
+            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+            <p>Hotline đặt bánh: 0912.345.678</p>
+            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

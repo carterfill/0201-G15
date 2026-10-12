@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực Đơn Bánh - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html" class="dang-chon">Sản Phẩm</a></li>
+                <li><a href="cart.html" class="nut-gio-hang">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="khung-chua">
+        <div class="tieu-de-trang">
+            <h2>Thực Đơn Bánh Tươi</h2>
+            <p>Chọn loại bánh bạn yêu thích và thêm vào giỏ hàng nhé!</p>
+        </div>
+
+        <div class="khung-tim-kiem">
+            <input type="text" id="o-tim-kiem" placeholder="🔍 Nhập tên bánh để tìm nhanh (Ví dụ: dâu, mousse...)" oninput="timKiemBanh()">
+        </div>
+
+        <div id="danh-sach-san-pham" class="luoi-banh"></div>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
+            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+            <p>Hotline đặt bánh: 0912.345.678</p>
+            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
