@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline hỗ trợ giao nhận: <strong>0912.345.678</strong></span>
+                <span>🛵 Đơn hàng đang được cập nhật thời gian thực</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html">Sản Phẩm</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="khung-chua">
+        <div class="thanh-dieu-huong-con">
+            <a href="index.html">Trang Chủ</a>
+            <span class="ngan-cach">/</span>
+            <a href="order-history.html">Lịch Sử Mua Hàng</a>
+            <span class="ngan-cach">/</span>
+            <span>Chi Tiết Đơn Hàng</span>
+        </div>
+    </div>
+
+    <main class="khung-chua" id="khung-chi-tiet-don-hang">
+        <div class="hop-chi-tiet-don">
+            <div class="dau-chi-tiet-don">
+                <div>
+                    <h2>Chi Tiết Đơn Hàng <span id="od-ma-don" style="color: var(--primary-dark);">#SB-8821</span></h2>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">
+                        Đặt lúc: <strong id="od-ngay-dat">--/--/----</strong> | Trạng thái: <strong id="od-trang-thai" style="color: var(--primary);">Đang xử lý</strong>
+                    </p>
+                </div>
+                <div class="nhom-nut-don">
+                    <button type="button" class="nut-bam nut-outline" onclick="window.print()">🖨️ In Đơn Hàng</button>
+                    <a href="order-history.html" class="nut-bam nut-bam-phu">&larr; Danh Sách Đơn</a>
+                </div>
+            </div>
+
+            <div class="timeline-don-hang">
+                <div class="timeline-step step-completed" id="step-1">
+                    <div class="step-icon">1</div>
+                    <div class="step-label">
+                        <strong>Đã Đặt Hàng</strong>
+                        <p style="font-size: 11px; color: var(--text-muted);">Hệ thống tiếp nhận</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step step-completed" id="step-2">
+                    <div class="step-icon">2</div>
+                    <div class="step-label">
+                        <strong>Làm Bánh</strong>
+                        <p style="font-size: 11px; color: var(--text-muted);">Nướng & trang trí bánh</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step step-active" id="step-3">
+                    <div class="step-icon">3</div>
+                    <div class="step-label">
+                        <strong>Đang Giao</strong>
+                        <p style="font-size: 11px; color: var(--text-muted);">Shipper đang chuyển</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step" id="step-4">
+                    <div class="step-icon">4</div>
+                    <div class="step-label">
+                        <strong>Hoàn Tất</strong>
+                        <p style="font-size: 11px; color: var(--text-muted);">Giao tận tay quý khách</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="luoi-thong-tin-don">
+                <div class="khoi-thong-tin-con">
+                    <h4>📍 Thông Tin Người Nhận Bánh</h4>
+                    <p><strong>Họ và tên:</strong> <span id="od-ho-ten">---</span></p>
+                    <p><strong>Số điện thoại:</strong> <span id="od-sdt">---</span></p>
+                    <p><strong>Email:</strong> <span id="od-email">---</span></p>
+                    <p><strong>Địa chỉ nhận hàng:</strong> <span id="od-dia-chi">---</span></p>
+                    <p><strong>Ghi chú đơn:</strong> <em id="od-ghi-chu">---</em></p>
+                </div>
+
+                <div class="khoi-thong-tin-con">
+                    <h4>💳 Thông Tin Vận Chuyển & Thanh Toán</h4>
+                    <p><strong>Hình thức giao:</strong> Giao hàng hỏa tốc bảo quản lạnh</p>
+                    <p><strong>Phương thức thanh toán:</strong> <span id="od-phuong-thuc">---</span></p>
+                    <p><strong>Trạng thái thanh toán:</strong> <span id="od-tt-thanh-toan" style="color: var(--success); font-weight: 600;">---</span></p>
+                    <p><strong>Đơn vị vận chuyển:</strong> Sweet Bakery Express (Nội thành TP.HCM)</p>
+                </div>
+            </div>
+
+            <div class="od-bang-wrap">
+                <h3 style="font-size: 17px; margin-bottom: 12px; color: var(--text-main);">📋 Danh Sách Bánh Trong Đơn Hàng</h3>
+                <table class="bang-gio-hang">
+                    <thead>
+                        <tr>
+                            <th>Sản Phẩm Bánh</th>
+                            <th>Đơn Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Thành Tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="od-bang-san-pham">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="od-tong-ket-hop">
+                <div class="dong-tinh-tien-checkout">
+                    <span>Tạm tính tiền bánh:</span>
+                    <strong id="od-tam-tinh">0 đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout">
+                    <span>Phí vận chuyển:</span>
+                    <strong id="od-phi-ship">0 đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout">
+                    <span>Khuyến mãi / Giảm giá:</span>
+                    <strong id="od-giam-gia" style="color: var(--danger);">-0 đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout tong">
+                    <span>TỔNG THANH TOÁN:</span>
+                    <span id="od-tong-tien">0 đ</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Hương vị bánh ngọt thanh nhẹ, nướng mới mỗi ngày với nguyên liệu cao cấp, mang lại niềm vui trọn vẹn cho từng khoảnh khắc sum vầy.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng & Thanh Toán - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline hỗ trợ đặt bánh: <strong>0912.345.678</strong></span>
+                <span>🔒 Thanh toán an toàn & bảo mật</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html">Sản Phẩm</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="khung-chua">
+        <div class="thanh-dieu-huong-con">
+            <a href="index.html">Trang Chủ</a>
+            <span class="ngan-cach">/</span>
+            <a href="cart.html">Giỏ Hàng</a>
+            <span class="ngan-cach">/</span>
+            <span>Xác Nhận Đặt Hàng & Thanh Toán</span>
+        </div>
+    </div>
+
+    <main class="khung-chua" id="khung-trang-checkout">
+        <div class="tieu-de-trang">
+            <h2>Xác Nhận Đặt Bánh & Thanh Toán</h2>
+            <p>Vui lòng điền thông tin người nhận để tiệm bánh giao hàng đúng hẹn nhé!</p>
+        </div>
+
+        <form onsubmit="xuLyDatHangCheckout(event)">
+            <div class="layout-checkout">
+                <div class="khung-thong-tin-giao-hang">
+                    <h3 class="tieu-de-khoi-checkout">📍 1. Thông Tin Nhận Bánh</h3>
+
+                    <div class="luoi-2-cot-form">
+                        <div class="hang-nhap">
+                            <label for="dat-hang-hoten">Họ và tên của bạn: *</label>
+                            <input type="text" id="dat-hang-hoten" placeholder="Ví dụ: Nguyễn Thị Mai" required>
+                        </div>
+                        <div class="hang-nhap">
+                            <label for="dat-hang-sdt">Số điện thoại nhận bánh: *</label>
+                            <input type="tel" id="dat-hang-sdt" placeholder="Ví dụ: 0912345678" required>
+                        </div>
+                    </div>
+
+                    <div class="hang-nhap">
+                        <label for="dat-hang-email">Địa chỉ Email (Nhận thông báo đơn):</label>
+                        <input type="email" id="dat-hang-email" placeholder="Ví dụ: mai.nguyen@gmail.com">
+                    </div>
+
+                    <div class="hang-nhap">
+                        <label for="dat-hang-diachi">Địa chỉ nhận hàng chi tiết: *</label>
+                        <input type="text" id="dat-hang-diachi" placeholder="Số nhà, tên đường, phường/xã, quận/huyện..." required>
+                    </div>
+
+                    <div class="hang-nhap">
+                        <label for="dat-hang-ghichu">Ghi chú cho tiệm bánh:</label>
+                        <textarea id="dat-hang-ghichu" rows="3" placeholder="Ví dụ: Ghi chữ 'Happy Birthday Lan' lên bánh, lấy thêm nến số 25..."></textarea>
+                    </div>
+
+                    <h3 class="tieu-de-khoi-checkout" style="margin-top: 25px;">💳 2. Chọn Phương Thức Thanh Toán</h3>
+                    <div class="danh-sach-phuong-thuc-tt">
+                        <label class="the-phuong-thuc">
+                            <input type="radio" name="phuong-thuc-tt" value="COD" checked>
+                            <span style="font-size: 24px;">💵</span>
+                            <div class="thong-tin-pt">
+                                <strong>Thanh toán tiền mặt khi nhận bánh (COD)</strong>
+                                <span>Kiểm tra bánh tươi ngon trước khi gửi tiền cho shipper</span>
+                            </div>
+                        </label>
+
+                        <label class="the-phuong-thuc">
+                            <input type="radio" name="phuong-thuc-tt" value="QR">
+                            <span style="font-size: 24px;">📲</span>
+                            <div class="thong-tin-pt">
+                                <strong>Chuyển khoản QR Ngân Hàng (VietQR / Momo)</strong>
+                                <span>Quét mã QR tự động điền số tài khoản và nội dung đơn</span>
+                            </div>
+                        </label>
+
+                        <label class="the-phuong-thuc">
+                            <input type="radio" name="phuong-thuc-tt" value="ATM">
+                            <span style="font-size: 24px;">💳</span>
+                            <div class="thong-tin-pt">
+                                <strong>Thẻ ATM Nội địa / Thẻ quốc tế Visa, Master</strong>
+                                <span>Thanh toán online qua cổng Napas an toàn</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="demo-qr-box">
+                        <p>💡 <em>Khi chọn quét mã QR, shipper hoặc nhân viên tiệm sẽ gửi mã VietQR chính xác để quý khách quét thanh toán nhanh trong 30 giây.</em></p>
+                    </div>
+                </div>
+
+                <div class="khung-tom-tat-don-hang">
+                    <h3 class="tieu-de-khoi-checkout">🛍️ Tóm Tắt Đơn Bánh</h3>
+
+                    <div id="checkout-danh-sach-mon">
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">Mã Giảm Giá / Voucher:</label>
+                        <div class="form-coupon">
+                            <input type="text" id="ma-voucher" placeholder="Nhập SWEET20 hoặc FREESHIP">
+                            <button type="button" class="nut-bam nut-bam-phu" onclick="apDungMaGiamGia()">Áp Dụng</button>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-color); padding-top: 15px;">
+                        <div class="dong-tinh-tien-checkout">
+                            <span>Tạm tính tiền bánh:</span>
+                            <strong id="checkout-tam-tinh">0 đ</strong>
+                        </div>
+                        <div class="dong-tinh-tien-checkout">
+                            <span>Phí giao hàng (Nội thành):</span>
+                            <strong id="checkout-phi-ship">20.000 đ</strong>
+                        </div>
+                        <div class="dong-tinh-tien-checkout">
+                            <span>Khuyến mãi / Giảm giá:</span>
+                            <strong id="checkout-giam-gia" style="color: var(--danger);">-0 đ</strong>
+                        </div>
+                        <div class="dong-tinh-tien-checkout tong">
+                            <span>TỔNG THANH TOÁN:</span>
+                            <span id="checkout-tong-tien">0 đ</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="nut-bam nut-lon" style="width: 100%; margin-top: 25px;">
+                        🎉 Xác Nhận Đặt Bánh Ngay
+                    </button>
+
+                    <p style="text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 14px;">
+                        Bằng việc bấm Đặt Bánh, bạn đồng ý với các điều khoản dịch vụ của Sweet Bakery.
+                    </p>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Hương vị bánh ngọt thanh nhẹ, nướng mới mỗi ngày với nguyên liệu cao cấp, mang lại niềm vui trọn vẹn cho từng khoảnh khắc sum vầy.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

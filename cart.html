@@ -7,30 +7,52 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline: <strong>0912.345.678</strong></span>
+                <span>🛒 Giỏ hàng lưu trữ tự động trên thiết bị của bạn</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan"></div>
+        </div>
+    </div>
+
     <header>
         <div class="khung-chua thanh-menu">
-            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
             <ul class="danh-sach-menu">
                 <li><a href="index.html">Trang Chủ</a></li>
                 <li><a href="products.html">Sản Phẩm</a></li>
-                <li><a href="cart.html" class="nut-gio-hang dang-chon">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
                 <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang dang-chon">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
 
+    <div class="khung-chua">
+        <div class="thanh-dieu-huong-con">
+            <a href="index.html">Trang Chủ</a>
+            <span class="ngan-cach">/</span>
+            <span>Giỏ Hàng Của Bạn</span>
+        </div>
+    </div>
+
     <main class="khung-chua">
         <div class="tieu-de-trang">
             <h2>Giỏ Hàng Của Bạn</h2>
-            <p>Kiểm tra lại các món bánh trước khi thanh toán</p>
+            <p>Kiểm tra số lượng và danh sách bánh trước khi tiến hành đặt hàng</p>
         </div>
 
         <div id="khung-gio-hang">
             <table class="bang-gio-hang">
                 <thead>
                     <tr>
-                        <th>Tên Bánh</th>
-                        <th>Đơn Giá</th>
+                        <th>Tên Món Bánh</th>
+                        <th class="cot-don-gia">Đơn Giá</th>
                         <th>Số Lượng</th>
                         <th>Thành Tiền</th>
                         <th>Xóa</th>
@@ -39,48 +61,97 @@
                 <tbody id="bang-gio-hang-body"></tbody>
             </table>
 
-            <div class="khung-tong-tien">
-                Tổng Tiền Thanh Toán: <span id="tong-tien-gio-hang">0 đ</span>
+            <div class="khung-hanh-dong-gio">
+                <div class="khung-ma-giam-gia">
+                    <h3>🎟️ Mã Giảm Giá / Voucher Ưu Đãi</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+                        Gợi ý: Nhập mã <strong>SWEET20</strong> (giảm 20k) hoặc <strong>FREESHIP</strong>
+                    </p>
+                    <div class="form-coupon">
+                        <input type="text" id="ma-voucher" placeholder="Nhập mã ưu đãi...">
+                        <button type="button" class="nut-bam nut-bam-phu" onclick="apDungMaGiamGia()">Áp Dụng</button>
+                    </div>
+                </div>
+
+                <div class="khung-tong-ket-gio">
+                    <div>
+                        <div class="dong-tong-ket">
+                            <span>Tạm tính tiền bánh:</span>
+                            <strong id="tong-tien-gio-hang">0 đ</strong>
+                        </div>
+                        <div class="dong-tong-ket">
+                            <span>Phí giao hàng:</span>
+                            <span style="font-size: 13px; color: var(--text-muted);">Tính ở bước Đặt Hàng</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="checkout.html" class="nut-bam nut-thanh-toan-chuyen-trang">
+                            🚀 Tiến Hành Đặt Hàng & Thanh Toán &rarr;
+                        </a>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="products.html" style="font-size: 13px; color: var(--primary); font-weight: 600;">
+                                &larr; Tiếp tục chọn thêm bánh khác
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <form class="form-nhap-lieu" onsubmit="datHang(event)">
-                <h3 class="tieu-de-form">Thông Tin Nhận Bánh</h3>
-
-                <div class="hang-nhap">
-                    <label for="dat-hang-hoten">Họ và tên của bạn:</label>
-                    <input type="text" id="dat-hang-hoten" placeholder="Ví dụ: Nguyễn Văn A" required>
-                </div>
-
-                <div class="hang-nhap">
-                    <label for="dat-hang-sdt">Số điện thoại:</label>
-                    <input type="tel" id="dat-hang-sdt" placeholder="Ví dụ: 0912345678" required>
-                </div>
-
-                <div class="hang-nhap">
-                    <label for="dat-hang-diachi">Địa chỉ nhận bánh:</label>
-                    <input type="text" id="dat-hang-diachi" placeholder="Số nhà, tên đường, quận/huyện..." required>
-                </div>
-
-                <button type="submit" class="nut-bam nut-dat-hang">
-                    Xác Nhận Đặt Hàng
-                </button>
-            </form>
         </div>
 
         <div id="gio-hang-trong" class="gio-hang-trong">
             <p class="bieu-tuong">🛒</p>
             <h3>Giỏ hàng của bạn đang trống!</h3>
-            <p>Hãy chọn vài chiếc bánh ngon cho hôm nay nhé.</p>
-            <a href="products.html" class="nut-bam">Đi Chọn Bánh Ngay</a>
+            <p>Hãy chọn những chiếc bánh thơm ngon chuẩn vị cho ngày hôm nay nhé.</p>
+            <a href="products.html" class="nut-bam nut-lon">Đi Chọn Bánh Ngay</a>
         </div>
     </main>
 
     <footer>
         <div class="khung-chua">
-            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
-            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
-            <p>Hotline đặt bánh: 0912.345.678</p>
-            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Hương vị bánh ngọt thanh nhẹ, nướng mới mỗi ngày với nguyên liệu cao cấp, mang lại niềm vui trọn vẹn cho từng khoảnh khắc sum vầy.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
         </div>
     </footer>
 

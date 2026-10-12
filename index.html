@@ -7,14 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline: <strong>0912.345.678</strong></span>
+                <span>⏰ Mở cửa: 07:00 - 21:30 hàng ngày</span>
+                <span>🛵 Miễn phí giao hàng từ 200.000 đ</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan">
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="khung-chua thanh-menu">
-            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
             <ul class="danh-sach-menu">
                 <li><a href="index.html" class="dang-chon">Trang Chủ</a></li>
                 <li><a href="products.html">Sản Phẩm</a></li>
-                <li><a href="cart.html" class="nut-gio-hang">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
                 <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
@@ -22,33 +38,139 @@
     <main class="khung-chua">
         <section class="banner">
             <h1>Chào Mừng Đến Với Sweet Bakery</h1>
-            <p>Bánh ngọt thủ công nướng mới mỗi ngày từ nguyên liệu tươi ngon nhất!</p>
-            <a href="products.html" class="nut-bam">Xem Thực Đơn Bánh</a>
+            <p>Bánh ngọt thủ công nướng tươi mỗi sáng từ bơ sữa Pháp và trái cây tự nhiên tuyển chọn. Trao gửi yêu thương qua từng hương vị!</p>
+            <div class="banner-nut-nhom">
+                <a href="products.html" class="nut-bam nut-lon">Khám Phá Thực Đơn Bánh</a>
+                <a href="contact.html" class="nut-bam nut-bam-phu nut-lon">Đặt Bánh Theo Yêu Cầu</a>
+            </div>
         </section>
 
-        <section class="gioi-thieu">
-            <h2>Về Tiệm Bánh Của Chúng Tôi</h2>
-            <p>Sweet Bakery là tiệm bánh nhỏ ấm cúng chuyên các dòng bánh sinh nhật, bánh mì sừng bò và bánh ngọt tráng miệng. Chúng tôi cam kết sử dụng bơ sữa tự nhiên, không phẩm màu độc hại.</p>
+        <section class="khoi-cam-ket">
+            <div class="the-cam-ket">
+                <div class="icon-cam-ket">🥖</div>
+                <h3>Bánh Nướng Tươi Mới</h3>
+                <p>Nướng bánh mỗi ngày từ 6:00 sáng, cam kết không sử dụng chất bảo quản.</p>
+            </div>
+            <div class="the-cam-ket">
+                <div class="icon-cam-ket">🍓</div>
+                <h3>Nguyên Liệu Tự Nhiên</h3>
+                <p>Dâu tây Đà Lạt hái trong ngày, bơ lạt nguyên chất Pháp và kem tươi New Zealand.</p>
+            </div>
+            <div class="the-cam-ket">
+                <div class="icon-cam-ket">⚡</div>
+                <h3>Giao Hỏa Tốc 2 Giờ</h3>
+                <p>Đóng hộp bảo quản lạnh kỹ càng, giao bánh nguyên vẹn thơm ngon đến tận tay.</p>
+            </div>
+            <div class="the-cam-ket">
+                <div class="icon-cam-ket">💯</div>
+                <h3>Đổi Trả An Tâm</h3>
+                <p>Cam kết 1 đổi 1 hoặc hoàn tiền nếu bánh không đúng mẫu hoặc bị lỗi trong quá trình giao.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="tieu-de-trang">
+                <h2>Danh Mục Bánh Nổi Bật</h2>
+                <p>Khám phá các dòng bánh được các tín đồ hảo ngọt yêu thích nhất</p>
+            </div>
+
+            <div class="luoi-danh-muc-home">
+                <div class="the-dm-home">
+                    <img src="images/banh-kem-dau-tay.jpg" alt="Bánh Kem Sinh Nhật">
+                    <div class="thong-tin-dm-home">
+                        <h3>Bánh Kem Sinh Nhật</h3>
+                        <p>Cốt bánh mềm xốp, phủ kem tươi thanh mát và hoa quả tươi</p>
+                        <a href="products.html?danhMuc=banh-kem" class="link-xem-dm">Xem danh mục &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="the-dm-home">
+                    <img src="images/croissant.jpg" alt="Bánh Mì & Pastry">
+                    <div class="thong-tin-dm-home">
+                        <h3>Bánh Mì & Pastry</h3>
+                        <p>Croissant sừng bò giòn rụm ngàn lớp thơm lừng bơ Pháp</p>
+                        <a href="products.html?danhMuc=banh-mi" class="link-xem-dm">Xem danh mục &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="the-dm-home">
+                    <img src="images/mousse-xoai.jpg" alt="Bánh Mousse & Bánh Lạnh">
+                    <div class="thong-tin-dm-home">
+                        <h3>Bánh Mousse & Bánh Lạnh</h3>
+                        <p>Mousse xoài, phô mai và tiramisu mát lạnh mịn màng</p>
+                        <a href="products.html?danhMuc=mousse-lanh" class="link-xem-dm">Xem danh mục &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="the-dm-home">
+                    <img src="images/macaron.jpg" alt="Macaron & Cookie">
+                    <div class="thong-tin-dm-home">
+                        <h3>Macaron & Cookie</h3>
+                        <p>Hộp quà bánh ngọt Pháp rực rỡ sắc màu vị hạnh nhân</p>
+                        <a href="products.html?danhMuc=macaron-cookie" class="link-xem-dm">Xem danh mục &rarr;</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section>
             <div class="tieu-de-trang">
                 <h2>Bánh Bán Chạy Trong Ngày</h2>
-                <p>Những mẫu bánh được khách hàng yêu thích nhất tuần này</p>
+                <p>Những mẫu bánh được khách hàng đặt nhiều nhất tại Sweet Bakery hôm nay</p>
             </div>
             <div id="danh-sach-trang-chu" class="luoi-banh"></div>
+
             <div class="nut-xem-them">
-                <a href="products.html" class="nut-bam nut-bam-phu">Xem Tất Cả Các Loại Bánh &rarr;</a>
+                <a href="products.html" class="nut-bam nut-bam-phu nut-lon">Xem Toàn Bộ Thực Đơn Bánh Của Tiệm &rarr;</a>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="khung-chua">
-            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
-            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
-            <p>Hotline đặt bánh: 0912.345.678</p>
-            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Sweet Bakery ra đời với sứ mệnh mang đến những chiếc bánh ngọt thủ công trọn vẹn hương vị tự nhiên, an toàn sức khỏe và ấm cúng cho mọi gia đình.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
         </div>
     </footer>
 

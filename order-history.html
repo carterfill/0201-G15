@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Mua Hàng - Sweet Bakery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline: <strong>0912.345.678</strong></span>
+                <span>📦 Tra cứu tiến trình làm bánh & vận chuyển</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
+            <ul class="danh-sach-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="products.html">Sản Phẩm</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="khung-chua">
+        <div class="thanh-dieu-huong-con">
+            <a href="index.html">Trang Chủ</a>
+            <span class="ngan-cach">/</span>
+            <span>Lịch Sử Mua Hàng</span>
+        </div>
+    </div>
+
+    <main class="khung-chua">
+        <div class="tieu-de-trang">
+            <h2>Lịch Sử Đặt Bánh Của Bạn</h2>
+            <p>Theo dõi trạng thái chuẩn bị bánh, thời gian giao hàng và chi tiết các đơn đã đặt</p>
+        </div>
+
+        <div id="danh-sach-don-hang" class="danh-sach-don-hang-container">
+        </div>
+    </main>
+
+    <footer>
+        <div class="khung-chua">
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Hương vị bánh ngọt thanh nhẹ, nướng mới mỗi ngày với nguyên liệu cao cấp, mang lại niềm vui trọn vẹn cho từng khoảnh khắc sum vầy.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

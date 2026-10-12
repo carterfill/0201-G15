@@ -3,41 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực Đơn Bánh - Sweet Bakery</title>
+    <title>Sản Phẩm & Thực Đơn Bánh - Sweet Bakery</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline: <strong>0912.345.678</strong></span>
+                <span>⏰ Mở cửa: 07:00 - 21:30</span>
+                <span>🛵 Đặt online nhận bánh tươi sau 2 giờ</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan"></div>
+        </div>
+    </div>
+
     <header>
         <div class="khung-chua thanh-menu">
-            <a href="index.html" class="logo">🍰 Sweet Bakery</a>
+            <a href="index.html" class="logo">🍰 Sweet<span>Bakery</span></a>
             <ul class="danh-sach-menu">
                 <li><a href="index.html">Trang Chủ</a></li>
                 <li><a href="products.html" class="dang-chon">Sản Phẩm</a></li>
-                <li><a href="cart.html" class="nut-gio-hang">🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)</a></li>
                 <li><a href="contact.html">Liên Hệ</a></li>
+                <li>
+                    <a href="cart.html" class="nut-gio-hang">
+                        🛒 Giỏ Hàng (<span id="so-luong-gio-hang">0</span>)
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
 
-    <main class="khung-chua">
+    <div class="khung-chua">
+        <div class="thanh-dieu-huong-con">
+            <a href="index.html">Trang Chủ</a>
+            <span class="ngan-cach">/</span>
+            <span>Thực Đơn Sản Phẩm</span>
+        </div>
+    </div>
+
+    <main class="khung-chua" id="khung-trang-san-pham">
         <div class="tieu-de-trang">
-            <h2>Thực Đơn Bánh Tươi</h2>
-            <p>Chọn loại bánh bạn yêu thích và thêm vào giỏ hàng nhé!</p>
+            <h2>Thực Đơn Bánh Sweet Bakery</h2>
+            <p>Khám phá thế giới bánh tươi ngon, chọn lọc nguyên liệu tự nhiên và nướng mới mỗi ngày</p>
         </div>
 
-        <div class="khung-tim-kiem">
-            <input type="text" id="o-tim-kiem" placeholder="🔍 Nhập tên bánh để tìm nhanh (Ví dụ: dâu, mousse...)" oninput="timKiemBanh()">
-        </div>
+        <div class="category-pills-bar" id="category-pills"></div>
 
-        <div id="danh-sach-san-pham" class="luoi-banh"></div>
+        <div class="layout-category">
+            <aside class="sidebar-bo-loc">
+                <div class="tieu-de-bo-loc-chinh">
+                    <h3>🔍 Bộ Lọc Tìm Kiếm</h3>
+                    <button type="button" class="nut-dat-lai" onclick="datLaiBoLoc()">Đặt lại</button>
+                </div>
+
+                <div class="nhom-loc-item">
+                    <h4>Danh Mục Bánh</h4>
+                    <div class="danh-sach-radio-loc">
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-danhmuc" value="tat-ca" checked onchange="chonDanhMucQuick('tat-ca')">
+                            <span>Tất Cả Loại Bánh</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-danhmuc" value="banh-kem" onchange="chonDanhMucQuick('banh-kem')">
+                            <span>Bánh Kem Sinh Nhật</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-danhmuc" value="banh-mi" onchange="chonDanhMucQuick('banh-mi')">
+                            <span>Bánh Mì & Pastry</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-danhmuc" value="mousse-lanh" onchange="chonDanhMucQuick('mousse-lanh')">
+                            <span>Bánh Mousse & Bánh Lạnh</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-danhmuc" value="macaron-cookie" onchange="chonDanhMucQuick('macaron-cookie')">
+                            <span>Macaron & Cookie</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="nhom-loc-item">
+                    <h4>Mức Giá (VNĐ)</h4>
+                    <div class="danh-sach-radio-loc">
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-gia" value="tat-ca" checked onchange="apDungBoLocSanPham()">
+                            <span>Tất Cả Mức Giá</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-gia" value="duoi-50" onchange="apDungBoLocSanPham()">
+                            <span>Dưới 50.000 đ</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-gia" value="50-150" onchange="apDungBoLocSanPham()">
+                            <span>Từ 50.000 đ - 150.000 đ</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="filter-gia" value="tren-150" onchange="apDungBoLocSanPham()">
+                            <span>Trên 150.000 đ</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="noi-dung-category-chinh">
+                <div class="thanh-cong-cu-category">
+                    <div class="o-tim-kiem-cat">
+                        <span>🔍 </span>
+                        <input type="text" id="o-tim-kiem" placeholder="Tìm tên bánh hoặc hương vị..." oninput="apDungBoLocSanPham()">
+                    </div>
+
+                    <div id="so-luong-ket-qua" style="font-size: 13.5px; color: var(--text-muted); font-weight: 500;">
+                        Đang tải sản phẩm...
+                    </div>
+
+                    <div class="hop-sap-xep">
+                        <label for="select-sap-xep">Sắp xếp:</label>
+                        <select id="select-sap-xep" onchange="apDungBoLocSanPham()">
+                            <option value="mac-dinh">Mặc định (Nổi bật nhất)</option>
+                            <option value="ban-chay">Bán chạy nhất 🔥</option>
+                            <option value="gia-tang">Giá tăng dần ⬆</option>
+                            <option value="gia-giam">Giá giảm dần ⬇</option>
+                            <option value="ten-az">Tên bánh A - Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="danh-sach-san-pham" class="luoi-banh"></div>
+            </section>
+        </div>
     </main>
 
     <footer>
         <div class="khung-chua">
-            <p><strong>Tiệm Bánh Sweet Bakery</strong></p>
-            <p>Địa chỉ: 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
-            <p>Hotline đặt bánh: 0912.345.678</p>
-            <p class="ban-quyen">&copy; 2026 Lập trình web.</p>
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Hương vị bánh ngọt thanh nhẹ, nướng mới mỗi ngày với nguyên liệu cao cấp, mang lại niềm vui trọn vẹn cho từng khoảnh khắc sum vầy.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="products.html?danhMuc=banh-kem">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="products.html?danhMuc=banh-mi">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="products.html?danhMuc=mousse-lanh">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="products.html?danhMuc=macaron-cookie">Macaron Cầu Vồng</a></li>
+                        <li><a href="products.html">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="order-history.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="cart.html">Giỏ hàng của bạn</a></li>
+                        <li><a href="contact.html">Góp ý & Khiếu nại</a></li>
+                        <li><a href="contact.html">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="login.html">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - Báo cáo đồ án Frontend.</p>
+            </div>
         </div>
     </footer>
 
