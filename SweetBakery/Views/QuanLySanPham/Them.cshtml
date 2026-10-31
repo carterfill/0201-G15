@@ -1,0 +1,98 @@
+@model SweetBakery.Models.SanPham
+@{
+    ViewBag.Title = "Thêm Bánh Mới";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var danhMucs = (List<SweetBakery.Models.DanhMuc>)ViewBag.DanhMucs;
+}
+<div class="admin-header-trang">
+    <h2>➕ Thêm Bánh Mới</h2>
+</div>
+
+<div class="admin-khung-form">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.TenSanPham)
+                @Html.TextBoxFor(m => m.TenSanPham, new { @class = "admin-o-nhap", placeholder = "Ví dụ: Bánh Kem Dâu Tây Đà Lạt" })
+                @Html.ValidationMessageFor(m => m.TenSanPham, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.MaDanhMuc)
+                @Html.DropDownListFor(m => m.MaDanhMuc, new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc"), "-- Chọn danh mục --", new { @class = "admin-o-nhap" })
+                @Html.ValidationMessageFor(m => m.MaDanhMuc, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Gia)
+                @Html.TextBoxFor(m => m.Gia, new { @class = "admin-o-nhap", type = "number", min = 1000, step = 1000, placeholder = "Ví dụ: 250000" })
+                @Html.ValidationMessageFor(m => m.Gia, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.GiaGoc)
+                @Html.TextBoxFor(m => m.GiaGoc, new { @class = "admin-o-nhap", type = "number", min = 0, step = 1000, placeholder = "Giá trước giảm giá (để trống nếu không có)" })
+                @Html.ValidationMessageFor(m => m.GiaGoc, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MoTa)
+            @Html.TextAreaFor(m => m.MoTa, new { @class = "admin-o-nhap", rows = 2, placeholder = "Mô tả ngắn hiện trên thẻ bánh..." })
+            @Html.ValidationMessageFor(m => m.MoTa, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MoTaChiTiet)
+            @Html.TextAreaFor(m => m.MoTaChiTiet, new { @class = "admin-o-nhap", rows = 4, placeholder = "Nội dung chi tiết hiện ở trang sản phẩm..." })
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.ThanhPhan)
+                @Html.TextAreaFor(m => m.ThanhPhan, new { @class = "admin-o-nhap", rows = 2 })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.BaoQuan)
+                @Html.TextAreaFor(m => m.BaoQuan, new { @class = "admin-o-nhap", rows = 2 })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.KichThuoc)
+                @Html.TextBoxFor(m => m.KichThuoc, new { @class = "admin-o-nhap", placeholder = "Ví dụ: Size 16cm (4 - 6 người)" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Sao)
+                @Html.DropDownListFor(m => m.Sao, new SelectList(new[] { 1, 2, 3, 4, 5 }), new { @class = "admin-o-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.DaBan)
+                @Html.TextBoxFor(m => m.DaBan, new { @class = "admin-o-nhap", type = "number", min = 0 })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Hot)
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    @Html.CheckBoxFor(m => m.Hot)
+                    <span>Hiện nhãn 🔥 Bán chạy</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hang-nhap">
+            <label>Chọn hình ảnh bánh:</label>
+            <input type="file" name="hinhAnhFile" accept="image/*" class="admin-o-nhap">
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 5px;">Ảnh sẽ được lưu vào thư mục Content/images. Nếu không chọn, hệ thống dùng ảnh mặc định croissant.jpg.</p>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" class="nut-bam">💾 Lưu Bánh Mới</button>
+            <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Quay Lại</a>
+        </div>
+    }
+</div>

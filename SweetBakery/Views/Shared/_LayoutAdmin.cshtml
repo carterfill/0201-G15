@@ -1,0 +1,36 @@
+@{
+    string hoTen = Session["HoTen"] as string;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Quản Trị Sweet Bakery</title>
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/admin.css">
+</head>
+<body>
+    <div class="admin-nav">
+        <div class="admin-nav-trai">
+            <span class="admin-logo">⚙️ Sweet Bakery - Quản Trị</span>
+            <a href="@Url.Action("Index", "QuanLyDanhMuc")">🗂️ Danh Mục</a>
+            <a href="@Url.Action("Index", "QuanLySanPham")">🍰 Sản Phẩm</a>
+            <a href="@Url.Action("Index", "QuanLyDonHang")">📦 Đơn Hàng</a>
+            <a href="@Url.Action("Index", "Home")">🌐 Xem Trang Khách</a>
+        </div>
+        <div class="admin-nav-phai">
+            <span>👤 @hoTen</span>
+            <a href="@Url.Action("DangXuat", "TaiKhoan")" class="admin-nut-dang-xuat">Đăng Xuất</a>
+        </div>
+    </div>
+
+    <main class="admin-khung-chua">
+        @if (TempData["ThongBao"] != null)
+        {
+            <div class="admin-thong-bao">✅ @TempData["ThongBao"]</div>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

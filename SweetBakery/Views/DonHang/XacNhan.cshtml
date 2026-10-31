@@ -1,0 +1,17 @@
+@model SweetBakery.Models.DonHang
+@{
+    ViewBag.Title = "Đặt Hàng Thành Công - Sweet Bakery";
+}
+<main class="khung-chua">
+    <div class="gio-hang-trong" style="display: block;">
+        <p class="bieu-tuong">🎉</p>
+        <h2 style="color: var(--primary-dark); margin-bottom: 15px;">ĐẶT HÀNG THÀNH CÔNG!</h2>
+        <p>Cảm ơn bạn: <strong>@Model.HoTenNguoiNhan</strong></p>
+        <p>Mã đơn hàng của bạn là: <strong style="color: var(--primary); font-size: 22px;">#SB-@Model.MaDonHang</strong></p>
+        <p>Sweet Bakery sẽ liên hệ và giao bánh trong thời gian sớm nhất!</p>
+        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+            <a href="@Url.Action("ChiTiet", "DonHang", new { id = Model.MaDonHang })" class="nut-bam nut-lon">Xem Chi Tiết Đơn Hàng</a>
+            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam nut-bam-phu nut-lon">Tiếp Tục Mua Bánh</a>
+        </div>
+    </div>
+</main>

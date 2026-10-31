@@ -1,0 +1,135 @@
+@model List<SweetBakery.Models.SanPham>
+@{
+    ViewBag.Title = "Sản Phẩm & Thực Đơn Bánh - Sweet Bakery";
+    var danhMucs = (List<SweetBakery.Models.DanhMuc>)ViewBag.DanhMucs;
+    int? maDanhMucDangChon = ViewBag.MaDanhMuc;
+    string khoangGiaDangChon = ViewBag.KhoangGia;
+    string sapXepDangChon = ViewBag.SapXep;
+    string tuKhoaDangChon = ViewBag.TuKhoa;
+    int trangHienTai = ViewBag.TrangHienTai;
+    int tongSoTrang = ViewBag.TongSoTrang;
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <span>Thực Đơn Sản Phẩm</span>
+    </div>
+</div>
+
+<main class="khung-chua" id="khung-trang-san-pham">
+    <div class="tieu-de-trang">
+        <h2>Thực Đơn Bánh Sweet Bakery</h2>
+        <p>Khám phá thế giới bánh tươi ngon, chọn lọc nguyên liệu tự nhiên và nướng mới mỗi ngày</p>
+    </div>
+
+    <div class="category-pills-bar">
+        <a href="@Url.Action("DanhSach", "SanPham")" class="pill-category @(maDanhMucDangChon == null ? "active" : "")">Tất Cả Sản Phẩm</a>
+        @foreach (var dm in danhMucs)
+        {
+            <a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = dm.MaDanhMuc })" class="pill-category @(maDanhMucDangChon == dm.MaDanhMuc ? "active" : "")">@dm.TenDanhMuc</a>
+        }
+    </div>
+
+    <form method="get" action="@Url.Action("DanhSach", "SanPham")">
+        <div class="layout-category">
+            <aside class="sidebar-bo-loc">
+                <div class="tieu-de-bo-loc-chinh">
+                    <h3>🔍 Bộ Lọc Tìm Kiếm</h3>
+                    <a href="@Url.Action("DanhSach", "SanPham")" class="nut-dat-lai">Đặt lại</a>
+                </div>
+
+                <div class="nhom-loc-item">
+                    <h4>Danh Mục Bánh</h4>
+                    <div class="danh-sach-radio-loc">
+                        <label class="dong-radio">
+                            <input type="radio" name="maDanhMuc" value="" checked="@(maDanhMucDangChon == null)" onchange="this.form.submit()">
+                            <span>Tất Cả Loại Bánh</span>
+                        </label>
+                        @foreach (var dm in danhMucs)
+                        {
+                            <label class="dong-radio">
+                                <input type="radio" name="maDanhMuc" value="@dm.MaDanhMuc" checked="@(maDanhMucDangChon == dm.MaDanhMuc)" onchange="this.form.submit()">
+                                <span>@dm.TenDanhMuc</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="nhom-loc-item">
+                    <h4>Mức Giá (VNĐ)</h4>
+                    <div class="danh-sach-radio-loc">
+                        <label class="dong-radio">
+                            <input type="radio" name="khoangGia" value="" checked="@(string.IsNullOrEmpty(khoangGiaDangChon))" onchange="this.form.submit()">
+                            <span>Tất Cả Mức Giá</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="khoangGia" value="duoi-50" checked="@(khoangGiaDangChon == "duoi-50")" onchange="this.form.submit()">
+                            <span>Dưới 50.000 đ</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="khoangGia" value="50-150" checked="@(khoangGiaDangChon == "50-150")" onchange="this.form.submit()">
+                            <span>Từ 50.000 đ - 150.000 đ</span>
+                        </label>
+                        <label class="dong-radio">
+                            <input type="radio" name="khoangGia" value="tren-150" checked="@(khoangGiaDangChon == "tren-150")" onchange="this.form.submit()">
+                            <span>Trên 150.000 đ</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="noi-dung-category-chinh">
+                <div class="thanh-cong-cu-category">
+                    <div class="o-tim-kiem-cat">
+                        <span>🔍 </span>
+                        <input type="text" name="tuKhoa" value="@tuKhoaDangChon" placeholder="Tìm tên bánh hoặc hương vị...">
+                    </div>
+
+                    <div style="font-size: 13.5px; color: var(--text-muted); font-weight: 500;">
+                        Tìm thấy @(ViewBag.TongSoSanPham) món bánh
+                    </div>
+
+                    <div class="hop-sap-xep">
+                        <label>Sắp xếp:</label>
+                        <select name="sapXep" onchange="this.form.submit()">
+                            <option value="" selected="@(string.IsNullOrEmpty(sapXepDangChon))">Mặc định (Nổi bật nhất)</option>
+                            <option value="ban-chay" selected="@(sapXepDangChon == "ban-chay")">Bán chạy nhất 🔥</option>
+                            <option value="gia-tang" selected="@(sapXepDangChon == "gia-tang")">Giá tăng dần ⬆</option>
+                            <option value="gia-giam" selected="@(sapXepDangChon == "gia-giam")">Giá giảm dần ⬇</option>
+                            <option value="ten-az" selected="@(sapXepDangChon == "ten-az")">Tên bánh A - Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="luoi-banh">
+                    @if (Model.Count == 0)
+                    {
+                        <div class="khong-tim-thay">
+                            <p class="icon-empty">🧁</p>
+                            <h4>Không tìm thấy món bánh phù hợp!</h4>
+                            <p>Hãy thử tìm bằng từ khóa khác hoặc bỏ các tiêu chí lọc nhé.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var sanPham in Model)
+                        {
+                            @Html.Partial("_TheSanPham", sanPham)
+                        }
+                    }
+                </div>
+
+                @if (tongSoTrang > 1)
+                {
+                    <div class="khung-phan-trang">
+                        @for (int i = 1; i <= tongSoTrang; i++)
+                        {
+                            <a href="@Url.Action("DanhSach", "SanPham", new { tuKhoa = tuKhoaDangChon, maDanhMuc = maDanhMucDangChon, khoangGia = khoangGiaDangChon, sapXep = sapXepDangChon, trang = i })" class="nut-phan-trang @(i == trangHienTai ? "dang-chon" : "")">@i</a>
+                        }
+                    </div>
+                }
+            </section>
+        </div>
+    </form>
+</main>

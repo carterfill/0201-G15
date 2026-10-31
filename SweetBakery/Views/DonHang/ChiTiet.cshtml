@@ -1,0 +1,154 @@
+@model SweetBakery.Models.DonHang
+@{
+    ViewBag.Title = "Chi Tiết Đơn Hàng #" + Model.MaDonHang + " - Sweet Bakery";
+    string tenTrangThai = "Chờ xác nhận & chuẩn bị bánh";
+    if (Model.TrangThai == 2)
+    {
+        tenTrangThai = "Đang nướng bánh & chuẩn bị";
+    }
+    else if (Model.TrangThai == 3)
+    {
+        tenTrangThai = "Đang giao hàng";
+    }
+    else if (Model.TrangThai == 4)
+    {
+        tenTrangThai = "Đã giao hàng";
+    }
+    else if (Model.TrangThai == 5)
+    {
+        tenTrangThai = "Đã hủy";
+    }
+
+    string[] tenBuoc = { "Đã Đặt Hàng", "Làm Bánh", "Đang Giao", "Hoàn Tất" };
+    string[] moTaBuoc = { "Hệ thống tiếp nhận", "Nướng & trang trí bánh", "Shipper đang chuyển", "Giao tận tay quý khách" };
+
+    decimal tamTinh = 0;
+    foreach (var chiTiet in Model.ChiTietDonHangs)
+    {
+        tamTinh += chiTiet.ThanhTien;
+    }
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <a href="@Url.Action("LichSu", "DonHang")">Lịch Sử Mua Hàng</a>
+        <span class="ngan-cach">/</span>
+        <span>Chi Tiết Đơn #SB-@Model.MaDonHang</span>
+    </div>
+</div>
+
+<main class="khung-chua" id="khung-chi-tiet-don-hang">
+    <div class="hop-chi-tiet-don">
+        <div class="dau-chi-tiet-don">
+            <div>
+                <h2>Chi Tiết Đơn Hàng <span style="color: var(--primary-dark);">#SB-@Model.MaDonHang</span></h2>
+                <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">
+                    Đặt lúc: <strong>@Model.NgayDat.ToString("dd/MM/yyyy HH:mm")</strong> | Trạng thái: <strong style="color: var(--primary);">@tenTrangThai</strong>
+                </p>
+            </div>
+            <div class="nhom-nut-don">
+                <button type="button" class="nut-bam nut-outline" onclick="window.print()">🖨️ In Đơn Hàng</button>
+                <a href="@Url.Action("LichSu", "DonHang")" class="nut-bam nut-bam-phu">&larr; Danh Sách Đơn</a>
+            </div>
+        </div>
+
+        @if (Model.TrangThai == 5)
+        {
+            <p class="canh-bao-huy">❌ Đơn hàng này đã bị hủy. Nếu có thắc mắc, vui lòng liên hệ hotline 0912.345.678.</p>
+        }
+        else
+        {
+            <div class="timeline-don-hang">
+                @for (int i = 1; i <= 4; i++)
+                {
+                    string lopBuoc = "";
+                    if (i < Model.TrangThai)
+                    {
+                        lopBuoc = "step-completed";
+                    }
+                    else if (i == Model.TrangThai)
+                    {
+                        lopBuoc = "step-active";
+                    }
+                    <div class="timeline-step @lopBuoc">
+                        <div class="step-icon">@i</div>
+                        <div class="step-label">
+                            <strong>@tenBuoc[i - 1]</strong>
+                            <p style="font-size: 11px; color: var(--text-muted);">@moTaBuoc[i - 1]</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="luoi-thong-tin-don">
+            <div class="khoi-thong-tin-con">
+                <h4>📍 Thông Tin Người Nhận Bánh</h4>
+                <p><strong>Họ và tên:</strong> @Model.HoTenNguoiNhan</p>
+                <p><strong>Số điện thoại:</strong> @Model.SoDienThoai</p>
+                <p><strong>Email:</strong> @Model.NguoiDung.Email</p>
+                <p><strong>Địa chỉ nhận hàng:</strong> @Model.DiaChiGiao</p>
+                <p><strong>Ghi chú đơn:</strong> <em>@Model.GhiChu</em></p>
+            </div>
+
+            <div class="khoi-thong-tin-con">
+                <h4>💳 Thông Tin Vận Chuyển & Thanh Toán</h4>
+                <p><strong>Hình thức giao:</strong> Giao hàng hỏa tốc bảo quản lạnh</p>
+                <p><strong>Phương thức thanh toán:</strong> @Model.PhuongThucThanhToan</p>
+                <p><strong>Trạng thái thanh toán:</strong> <span style="color: var(--success); font-weight: 600;">@Model.TrangThaiThanhToan</span></p>
+                <p><strong>Đơn vị vận chuyển:</strong> Sweet Bakery Express (Nội thành TP.HCM)</p>
+            </div>
+        </div>
+
+        <div class="od-bang-wrap">
+            <h3 style="font-size: 17px; margin-bottom: 12px; color: var(--text-main);">📋 Danh Sách Bánh Trong Đơn Hàng</h3>
+            <table class="bang-gio-hang">
+                <thead>
+                    <tr>
+                        <th>Tên Món Bánh</th>
+                        <th class="cot-don-gia">Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs)
+                    {
+                        <tr>
+                            <td class="cot-san-pham">
+                                <img src="~/Content/images/@chiTiet.HinhAnh" alt="@chiTiet.TenSanPham" class="anh-nho">
+                                <div class="ten-sp-gio">
+                                    <a href="@Url.Action("ChiTiet", "SanPham", new { id = chiTiet.MaSanPham })"><strong>@chiTiet.TenSanPham</strong></a>
+                                    <span class="gia-dong-mobile">@chiTiet.Gia.ToString("N0") đ</span>
+                                </div>
+                            </td>
+                            <td class="cot-don-gia">@chiTiet.Gia.ToString("N0") đ</td>
+                            <td>@chiTiet.SoLuong</td>
+                            <td class="cot-thanh-tien"><strong>@chiTiet.ThanhTien.ToString("N0") đ</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div style="text-align: right; padding: 15px 5px 0 0;">
+                <div class="dong-tinh-tien-checkout">
+                    <span>Tạm tính tiền bánh:</span>
+                    <strong>@tamTinh.ToString("N0") đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout">
+                    <span>Phí giao hàng:</span>
+                    <strong>@Model.PhiShip.ToString("N0") đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout">
+                    <span>Khuyến mãi / Giảm giá:</span>
+                    <strong style="color: var(--danger);">-@Model.GiamGia.ToString("N0") đ</strong>
+                </div>
+                <div class="dong-tinh-tien-checkout tong">
+                    <span>TỔNG THANH TOÁN:</span>
+                    <span>@Model.TongTien.ToString("N0") đ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

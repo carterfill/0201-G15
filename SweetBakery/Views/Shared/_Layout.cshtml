@@ -1,0 +1,130 @@
+@{
+    bool daDangNhap = Session["MaNguoiDung"] != null;
+    string hoTen = Session["HoTen"] as string;
+    string vaiTro = Session["VaiTro"] as string;
+    var gioHang = Session["GioHang"] as List<SweetBakery.Models.GioHangItem>;
+    int soLuongGioHang = 0;
+    if (gioHang != null)
+    {
+        foreach (var item in gioHang)
+        {
+            soLuongGioHang += item.SoLuong;
+        }
+    }
+    string controllerHienTai = ViewContext.RouteData.Values["controller"].ToString();
+    string actionHienTai = ViewContext.RouteData.Values["action"].ToString();
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/style.css">
+</head>
+<body>
+    <div class="thanh-thong-tin-top">
+        <div class="khung-chua noi-dung-top-bar">
+            <div class="thong-tin-trai">
+                <span>📞 Hotline: <strong>0912.345.678</strong></span>
+                <span>⏰ Mở cửa: 07:00 - 21:30 hàng ngày</span>
+                <span>🛵 Miễn phí giao hàng từ 200.000 đ</span>
+            </div>
+            <div class="thong-tin-phai" id="khu-vuc-tai-khoan">
+                @if (daDangNhap)
+                {
+                    <div class="user-logged-in">
+                        <span class="user-greeting">👋 Chào, <strong>@hoTen</strong></span>
+                        <a href="@Url.Action("LichSu", "DonHang")" class="user-link">Lịch Sử Mua Hàng</a>
+                        @if (vaiTro == "admin")
+                        {
+                            <a href="@Url.Action("Index", "QuanLySanPham")" class="user-link">⚙️ Quản Lý</a>
+                        }
+                        <a href="@Url.Action("DangXuat", "TaiKhoan")" class="btn-logout">Đăng Xuất</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="user-auth-links">
+                        <a href="@Url.Action("DangNhap", "TaiKhoan")" class="auth-btn btn-login">Đăng Nhập</a>
+                        <a href="@Url.Action("DangKy", "TaiKhoan")" class="auth-btn btn-register">Đăng Ký</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="khung-chua thanh-menu">
+            <a href="@Url.Action("Index", "Home")" class="logo">🍰 Sweet<span>Bakery</span></a>
+            <ul class="danh-sach-menu">
+                <li><a href="@Url.Action("Index", "Home")" class="@(controllerHienTai == "Home" && actionHienTai == "Index" ? "dang-chon" : "")">Trang Chủ</a></li>
+                <li><a href="@Url.Action("DanhSach", "SanPham")" class="@(controllerHienTai == "SanPham" ? "dang-chon" : "")">Sản Phẩm</a></li>
+                <li><a href="@Url.Action("LienHe", "Home")" class="@(controllerHienTai == "Home" && actionHienTai == "LienHe" ? "dang-chon" : "")">Liên Hệ</a></li>
+                <li>
+                    <a href="@Url.Action("Index", "GioHang")" class="nut-gio-hang @(controllerHienTai == "GioHang" ? "dang-chon" : "")">
+                        🛒 Giỏ Hàng (<span>@soLuongGioHang</span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    @if (TempData["ThongBao"] != null)
+    {
+        <div class="khung-chua" style="padding-top: 15px;">
+            <div class="hop-thong-bao">✅ @TempData["ThongBao"]</div>
+        </div>
+    }
+
+    @RenderBody()
+
+    <footer>
+        <div class="khung-chua">
+            <div class="luoi-footer">
+                <div class="cot-footer">
+                    <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+                    <p>Sweet Bakery ra đời với sứ mệnh mang đến những chiếc bánh ngọt thủ công trọn vẹn hương vị tự nhiên, an toàn sức khỏe và ấm cúng cho mọi gia đình.</p>
+                    <p>📍 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+                    <p>📞 Hotline: 0912.345.678</p>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Danh Mục Bánh</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 1 })">Bánh Kem Sinh Nhật</a></li>
+                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 2 })">Bánh Mì Sừng Bò Croissant</a></li>
+                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 3 })">Bánh Mousse & Tiramisu</a></li>
+                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 4 })">Macaron Cầu Vồng</a></li>
+                        <li><a href="@Url.Action("DanhSach", "SanPham")">Tất Cả Sản Phẩm</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Hỗ Trợ Khách Hàng</h3>
+                    <ul class="danh-sach-link-footer">
+                        <li><a href="@Url.Action("LichSu", "DonHang")">Tra cứu đơn hàng</a></li>
+                        <li><a href="@Url.Action("Index", "GioHang")">Giỏ hàng của bạn</a></li>
+                        <li><a href="@Url.Action("LienHe", "Home")">Góp ý & Khiếu nại</a></li>
+                        <li><a href="@Url.Action("LienHe", "Home")">Đặt bánh theo yêu cầu</a></li>
+                        <li><a href="@Url.Action("DangNhap", "TaiKhoan")">Đăng nhập tài khoản</a></li>
+                    </ul>
+                </div>
+
+                <div class="cot-footer">
+                    <h3>Đăng Ký Nhận Khuyến Mãi</h3>
+                    <p>Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên khi đăng ký email tại đây:</p>
+                    <form class="phuong-thuc-nhan-tin" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận tin khuyến mãi!');">
+                        <input type="email" placeholder="Nhập email của bạn..." required>
+                        <button type="submit" class="nut-bam">Gửi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ban-quyen-dong">
+                <p>&copy; 2026 Sweet Bakery. Đồ án môn Lập trình Web - ASP.NET MVC 5.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

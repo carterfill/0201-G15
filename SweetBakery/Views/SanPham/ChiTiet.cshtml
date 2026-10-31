@@ -1,0 +1,132 @@
+@model SweetBakery.Models.SanPham
+@{
+    ViewBag.Title = Model.TenSanPham + " - Sweet Bakery";
+    var sanPhamLienQuan = (List<SweetBakery.Models.SanPham>)ViewBag.SanPhamLienQuan;
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = Model.MaDanhMuc })">@Model.DanhMuc.TenDanhMuc</a>
+        <span class="ngan-cach">/</span>
+        <span>@Model.TenSanPham</span>
+    </div>
+</div>
+
+<main class="khung-chua" id="khung-chi-tiet-san-pham">
+    <div class="layout-chi-tiet-sp">
+        <div class="cot-hinh-anh-sp">
+            <div class="anh-chinh-wrapper">
+                <img src="~/Content/images/@Model.HinhAnh" alt="@Model.TenSanPham">
+            </div>
+            <div class="badge-hang-chinh-hang">
+                <span>🌿 Bánh nướng thủ công mới mỗi ngày - 100% Nguyên liệu tự nhiên</span>
+            </div>
+        </div>
+
+        <div class="cot-thong-tin-sp">
+            <h1>@Model.TenSanPham</h1>
+            <div class="thong-so-phu-sp">
+                <span>MSP: SB-@(1000 + Model.MaSanPham)</span>
+                <span>|</span>
+                <span>Danh mục: <strong>@Model.DanhMuc.TenDanhMuc</strong></span>
+                <span>|</span>
+                <span class="danh-gia-sao"><span class="sao">★★★★★</span> (@(Model.Sao).0)</span>
+                <span>|</span>
+                <span style="color: var(--primary-dark); font-weight: 600;">Đã bán @Model.DaBan sản phẩm</span>
+            </div>
+
+            <div class="khung-gia-chi-tiet">
+                <span class="gia-hien-tai-ct">@Model.Gia.ToString("N0") đ</span>
+                @if (Model.GiaGoc.HasValue && Model.GiaGoc.Value > Model.Gia)
+                {
+                    <span class="gia-goc-ct">@Model.GiaGoc.Value.ToString("N0") đ</span>
+                    <span class="tiet-kiem-ct">(Tiết kiệm @((Model.GiaGoc.Value - Model.Gia).ToString("N0")) đ)</span>
+                }
+            </div>
+
+            <p class="mo-ta-ngan-ct">@Model.MoTa</p>
+
+            <div class="chon-so-luong-nhom">
+                <label for="so-luong-chi-tiet">Số lượng:</label>
+                <div class="bo-chon-so-luong">
+                    <button type="button" onclick="thayDoiSoLuong(-1)">-</button>
+                    <input type="text" id="so-luong-chi-tiet" value="1" readonly>
+                    <button type="button" onclick="thayDoiSoLuong(1)">+</button>
+                </div>
+            </div>
+
+            <div class="nhom-nut-dat-hang-ct">
+                <form action="@Url.Action("Them", "GioHang")" method="post" style="display: inline-block; margin: 0;">
+                    <input type="hidden" name="id" value="@Model.MaSanPham">
+                    <input type="hidden" name="soLuong" id="so-luong-them" value="1">
+                    <button type="submit" class="nut-bam nut-outline">🛒 Thêm Vào Giỏ Hàng</button>
+                </form>
+                <form action="@Url.Action("Them", "GioHang")" method="post" style="display: inline-block; margin: 0;">
+                    <input type="hidden" name="id" value="@Model.MaSanPham">
+                    <input type="hidden" name="soLuong" id="so-luong-mua" value="1">
+                    <input type="hidden" name="muaNgay" value="1">
+                    <button type="submit" class="nut-bam">⚡ Mua Ngay (Thanh Toán)</button>
+                </form>
+            </div>
+
+            <div class="chinh-sach-giao-banh">
+                <p>🚚 <strong>Giao hàng:</strong> Hỏa tốc trong 2 giờ tại nội thành TP.HCM.</p>
+                <p>❄️ <strong>Bảo quản khi giao:</strong> Đóng hộp giữ nhiệt kèm đá gel bảo quản bánh lạnh nguyên form.</p>
+                <p>🎁 <strong>Ưu đãi:</strong> Tặng kèm dao cắt bánh, đĩa giấy và nến sinh nhật miễn phí.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="khoi-tab-chi-tiet">
+        <h3 class="tieu-de-tab-sp">Thông Tin Chi Tiết & Hướng Dẫn Sử Dụng</h3>
+        <p class="noi-dung-chi-tiet-banh">@Model.MoTaChiTiet</p>
+
+        <table class="bang-thong-so-banh">
+            <tbody>
+                <tr>
+                    <td>Thành phần chính</td>
+                    <td>@Model.ThanhPhan</td>
+                </tr>
+                <tr>
+                    <td>Quy cách / Kích thước</td>
+                    <td>@Model.KichThuoc</td>
+                </tr>
+                <tr>
+                    <td>Hướng dẫn bảo quản</td>
+                    <td>@Model.BaoQuan</td>
+                </tr>
+                <tr>
+                    <td>Hạn sử dụng khuyến nghị</td>
+                    <td>Dùng ngon nhất trong vòng 24 - 48 giờ kể từ lúc nhận bánh</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <section style="margin-bottom: 50px;">
+        <div class="tieu-de-trang">
+            <h2>Có Thể Bạn Cũng Thích</h2>
+            <p>Những món bánh cùng danh mục được yêu thích tương tự</p>
+        </div>
+        <div class="luoi-banh">
+            @foreach (var sanPham in sanPhamLienQuan)
+            {
+                @Html.Partial("_TheSanPham", sanPham)
+            }
+        </div>
+    </section>
+</main>
+
+<script>
+    function thayDoiSoLuong(delta) {
+        var oSoLuong = document.getElementById("so-luong-chi-tiet");
+        var soLuong = parseInt(oSoLuong.value) || 1;
+        soLuong += delta;
+        if (soLuong < 1) soLuong = 1;
+        if (soLuong > 99) soLuong = 99;
+        oSoLuong.value = soLuong;
+        document.getElementById("so-luong-them").value = soLuong;
+        document.getElementById("so-luong-mua").value = soLuong;
+    }
+</script>

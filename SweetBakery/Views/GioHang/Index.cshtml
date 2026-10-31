@@ -1,0 +1,113 @@
+@model List<SweetBakery.Models.MonTrongGio>
+@{
+    ViewBag.Title = "Giỏ Hàng - Sweet Bakery";
+    string maGiamGia = ViewBag.MaGiamGia;
+    decimal tamTinh = 0;
+    foreach (var item in Model)
+    {
+        tamTinh += item.ThanhTien;
+    }
+}
+<main class="khung-chua">
+    <div class="tieu-de-trang">
+        <h2>Giỏ Hàng Của Bạn</h2>
+        <p>Kiểm tra số lượng và danh sách bánh trước khi tiến hành đặt hàng</p>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="gio-hang-trong" style="display: block;">
+            <p class="bieu-tuong">🛒</p>
+            <h3>Giỏ hàng của bạn đang trống!</h3>
+            <p>Hãy chọn những chiếc bánh thơm ngon chuẩn vị cho ngày hôm nay nhé.</p>
+            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam nut-lon">Đi Chọn Bánh Ngay</a>
+        </div>
+    }
+    else
+    {
+        <div id="khung-gio-hang">
+            <table class="bang-gio-hang">
+                <thead>
+                    <tr>
+                        <th>Tên Món Bánh</th>
+                        <th class="cot-don-gia">Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var mon in Model)
+                    {
+                        <tr>
+                            <td class="cot-san-pham">
+                                <img src="~/Content/images/@mon.SanPham.HinhAnh" alt="@mon.SanPham.TenSanPham" class="anh-nho">
+                                <div class="ten-sp-gio">
+                                    <a href="@Url.Action("ChiTiet", "SanPham", new { id = mon.SanPham.MaSanPham })"><strong>@mon.SanPham.TenSanPham</strong></a>
+                                    <span class="gia-dong-mobile">@mon.SanPham.Gia.ToString("N0") đ</span>
+                                </div>
+                            </td>
+                            <td class="cot-don-gia">@mon.SanPham.Gia.ToString("N0") đ</td>
+                            <td class="cot-so-luong">
+                                <form action="@Url.Action("CapNhat", "GioHang")" method="post" class="form-cap-nhat-gio">
+                                    <input type="hidden" name="id" value="@mon.SanPham.MaSanPham">
+                                    <input type="number" name="soLuong" value="@mon.SoLuong" min="1" max="99" class="o-nhap-so-luong">
+                                    <button type="submit" class="nut-cap-nhat-so-luong">Cập nhật</button>
+                                </form>
+                            </td>
+                            <td class="cot-thanh-tien"><strong>@mon.ThanhTien.ToString("N0") đ</strong></td>
+                            <td class="cot-thao-tac">
+                                <form action="@Url.Action("Xoa", "GioHang")" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa món bánh này khỏi giỏ hàng không?');">
+                                    <input type="hidden" name="id" value="@mon.SanPham.MaSanPham">
+                                    <button type="submit" class="nut-xoa" title="Xóa món bánh này">🗑️</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="khung-hanh-dong-gio">
+                <div class="khung-ma-giam-gia">
+                    <h3>🎟️ Mã Giảm Giá / Voucher Ưu Đãi</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+                        Gợi ý: Nhập mã <strong>SWEET20</strong> (giảm 20k) hoặc <strong>FREESHIP</strong>
+                        @if (!string.IsNullOrEmpty(maGiamGia))
+                        {
+                            <br>
+                            <em>Đang áp dụng mã: <strong>@maGiamGia</strong></em>
+                        }
+                    </p>
+                    <form action="@Url.Action("ApDungVoucher", "GioHang")" method="post" class="form-coupon">
+                        <input type="text" name="maVoucher" placeholder="Nhập mã ưu đãi...">
+                        <button type="submit" class="nut-bam nut-bam-phu">Áp Dụng</button>
+                    </form>
+                </div>
+
+                <div class="khung-tong-ket-gio">
+                    <div>
+                        <div class="dong-tong-ket">
+                            <span>Tạm tính tiền bánh:</span>
+                            <strong>@tamTinh.ToString("N0") đ</strong>
+                        </div>
+                        <div class="dong-tong-ket">
+                            <span>Phí giao hàng:</span>
+                            <span style="font-size: 13px; color: var(--text-muted);">Tính ở bước Đặt Hàng</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="@Url.Action("DatHang", "DonHang")" class="nut-bam nut-thanh-toan-chuyen-trang">
+                            🚀 Tiến Hành Đặt Hàng & Thanh Toán &rarr;
+                        </a>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="@Url.Action("DanhSach", "SanPham")" style="font-size: 13px; color: var(--primary); font-weight: 600;">
+                                &larr; Tiếp tục chọn thêm bánh khác
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</main>

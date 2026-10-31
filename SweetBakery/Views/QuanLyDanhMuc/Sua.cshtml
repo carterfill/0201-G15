@@ -1,0 +1,38 @@
+@model SweetBakery.Models.DanhMuc
+@{
+    ViewBag.Title = "Sửa Danh Mục";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-header-trang">
+    <h2>✏️ Sửa Danh Mục: @Model.TenDanhMuc</h2>
+</div>
+
+<div class="admin-khung-form">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.MaDanhMuc)
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.TenDanhMuc)
+            @Html.TextBoxFor(m => m.TenDanhMuc, new { @class = "admin-o-nhap" })
+            @Html.ValidationMessageFor(m => m.TenDanhMuc, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MoTa)
+            @Html.TextAreaFor(m => m.MoTa, new { @class = "admin-o-nhap", rows = 3 })
+            @Html.ValidationMessageFor(m => m.MoTa, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.HinhAnh)
+            @Html.TextBoxFor(m => m.HinhAnh, new { @class = "admin-o-nhap" })
+            @Html.ValidationMessageFor(m => m.HinhAnh, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" class="nut-bam">💾 Cập Nhật Danh Mục</button>
+            <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Quay Lại</a>
+        </div>
+    }
+</div>

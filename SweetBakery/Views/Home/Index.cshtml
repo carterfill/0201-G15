@@ -1,0 +1,76 @@
+@model List<SweetBakery.Models.SanPham>
+@{
+    ViewBag.Title = "Tiệm Bánh Sweet Bakery - Trang Chủ";
+    var danhMucs = (List<SweetBakery.Models.DanhMuc>)ViewBag.DanhMucs;
+}
+<main class="khung-chua">
+    <section class="banner">
+        <h1>Chào Mừng Đến Với Sweet Bakery</h1>
+        <p>Bánh ngọt thủ công nướng tươi mỗi sáng từ bơ sữa Pháp và trái cây tự nhiên tuyển chọn. Trao gửi yêu thương qua từng hương vị!</p>
+        <div class="banner-nut-nhom">
+            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam nut-lon">Khám Phá Thực Đơn Bánh</a>
+            <a href="@Url.Action("LienHe", "Home")" class="nut-bam nut-bam-phu nut-lon">Đặt Bánh Theo Yêu Cầu</a>
+        </div>
+    </section>
+
+    <section class="khoi-cam-ket">
+        <div class="the-cam-ket">
+            <div class="icon-cam-ket">🥖</div>
+            <h3>Bánh Nướng Tươi Mới</h3>
+            <p>Nướng bánh mỗi ngày từ 6:00 sáng, cam kết không sử dụng chất bảo quản.</p>
+        </div>
+        <div class="the-cam-ket">
+            <div class="icon-cam-ket">🍓</div>
+            <h3>Nguyên Liệu Tự Nhiên</h3>
+            <p>Dâu tây Đà Lạt hái trong ngày, bơ lạt nguyên chất Pháp và kem tươi New Zealand.</p>
+        </div>
+        <div class="the-cam-ket">
+            <div class="icon-cam-ket">⚡</div>
+            <h3>Giao Hỏa Tốc 2 Giờ</h3>
+            <p>Đóng hộp bảo quản lạnh kỹ càng, giao bánh nguyên vẹn thơm ngon đến tận tay.</p>
+        </div>
+        <div class="the-cam-ket">
+            <div class="icon-cam-ket">💯</div>
+            <h3>Đổi Trả An Tâm</h3>
+            <p>Cam kết 1 đổi 1 hoặc hoàn tiền nếu bánh không đúng mẫu hoặc bị lỗi trong quá trình giao.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="tieu-de-trang">
+            <h2>Danh Mục Bánh Nổi Bật</h2>
+            <p>Khám phá các dòng bánh được các tín đồ hảo ngọt yêu thích nhất</p>
+        </div>
+
+        <div class="luoi-danh-muc-home">
+            @foreach (var dm in danhMucs)
+            {
+                <div class="the-dm-home">
+                    <img src="~/Content/images/@dm.HinhAnh" alt="@dm.TenDanhMuc">
+                    <div class="thong-tin-dm-home">
+                        <h3>@dm.TenDanhMuc</h3>
+                        <p>@dm.MoTa</p>
+                        <a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = dm.MaDanhMuc })" class="link-xem-dm">Xem danh mục &rarr;</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section>
+        <div class="tieu-de-trang">
+            <h2>Bánh Bán Chạy Trong Ngày</h2>
+            <p>Những mẫu bánh được khách hàng đặt nhiều nhất tại Sweet Bakery hôm nay</p>
+        </div>
+        <div class="luoi-banh">
+            @foreach (var sanPham in Model)
+            {
+                @Html.Partial("_TheSanPham", sanPham)
+            }
+        </div>
+
+        <div class="nut-xem-them">
+            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam nut-bam-phu nut-lon">Xem Toàn Bộ Thực Đơn Bánh Của Tiệm &rarr;</a>
+        </div>
+    </section>
+</main>

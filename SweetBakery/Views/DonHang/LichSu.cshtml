@@ -1,0 +1,100 @@
+@model List<SweetBakery.Models.DonHang>
+@{
+    ViewBag.Title = "Lịch Sử Mua Hàng - Sweet Bakery";
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <span>Lịch Sử Mua Hàng</span>
+    </div>
+</div>
+
+<main class="khung-chua">
+    <div class="tieu-de-trang">
+        <h2>Lịch Sử Đặt Bánh Của Bạn</h2>
+        <p>Theo dõi trạng thái chuẩn bị bánh, thời gian giao hàng và chi tiết các đơn đã đặt</p>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="gio-hang-trong" style="display: block;">
+            <p class="bieu-tuong">📦</p>
+            <h3>Bạn chưa có đơn đặt hàng nào!</h3>
+            <p>Hãy chọn những chiếc bánh thơm ngon và đặt hàng ngay hôm nay nhé.</p>
+            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam">Khám Phá Bánh Ngon</a>
+        </div>
+    }
+    else
+    {
+        <div class="danh-sach-don-hang-container">
+            @foreach (var dh in Model)
+            {
+                string badgeTrangThai = "badge-cho-xac-nhan";
+                string tenTrangThai = "Chờ xác nhận & chuẩn bị bánh";
+                if (dh.TrangThai == 2)
+                {
+                    badgeTrangThai = "badge-dang-lam";
+                    tenTrangThai = "Đang nướng bánh & chuẩn bị";
+                }
+                else if (dh.TrangThai == 3)
+                {
+                    badgeTrangThai = "badge-dang-giao";
+                    tenTrangThai = "Đang giao hàng";
+                }
+                else if (dh.TrangThai == 4)
+                {
+                    badgeTrangThai = "badge-da-giao";
+                    tenTrangThai = "Đã giao hàng";
+                }
+                else if (dh.TrangThai == 5)
+                {
+                    badgeTrangThai = "badge-da-huy";
+                    tenTrangThai = "Đã hủy";
+                }
+
+                var dsAnh = dh.ChiTietDonHangs.Take(3).ToList();
+                int soMonConLai = dh.ChiTietDonHangs.Count - dsAnh.Count;
+
+                <div class="the-don-hang">
+                    <div class="dau-the-don">
+                        <div class="ma-va-ngay">
+                            <span class="ma-don">Mã: <strong>#SB-@dh.MaDonHang</strong></span>
+                            <span class="ngay-dat">📅 @dh.NgayDat.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                        <span class="badge-trang-thai @badgeTrangThai">@tenTrangThai</span>
+                    </div>
+
+                    <div class="than-the-don">
+                        <div class="hinh-san-pham-don">
+                            @foreach (var chiTiet in dsAnh)
+                            {
+                                <img src="~/Content/images/@chiTiet.HinhAnh" alt="@chiTiet.TenSanPham" class="anh-mini-don" title="@chiTiet.TenSanPham (x@chiTiet.SoLuong)">
+                            }
+                            @if (soMonConLai > 0)
+                            {
+                                <span class="them-sp">+@soMonConLai món khác</span>
+                            }
+                        </div>
+                        <div class="thong-tin-nhan-don">
+                            <p><strong>Người nhận:</strong> @dh.HoTenNguoiNhan (@dh.SoDienThoai)</p>
+                            <p><strong>Địa chỉ:</strong> @dh.DiaChiGiao</p>
+                            <p><strong>Thanh toán:</strong> @dh.PhuongThucThanhToan</p>
+                        </div>
+                    </div>
+
+                    <div class="chan-the-don">
+                        <div class="tong-tien-don">
+                            <span>Tổng tiền: </span>
+                            <strong>@dh.TongTien.ToString("N0") đ</strong>
+                        </div>
+                        <div class="nhom-nut-don">
+                            <a href="@Url.Action("ChiTiet", "DonHang", new { id = dh.MaDonHang })" class="nut-bam nut-bam-phu">Xem Chi Tiết Đơn</a>
+                            <a href="@Url.Action("DanhSach", "SanPham")" class="nut-bam">Mua Lại</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</main>

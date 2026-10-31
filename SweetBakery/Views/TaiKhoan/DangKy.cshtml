@@ -1,0 +1,64 @@
+@model SweetBakery.Models.NguoiDung
+@{
+    ViewBag.Title = "Đăng Ký Tài Khoản - Sweet Bakery";
+}
+<main class="khung-chua">
+    <div class="khung-auth-chinh">
+        <div class="dau-trang-auth">
+            <span class="logo-auth">🎂</span>
+            <h2>Tạo Tài Khoản Mới</h2>
+            <p>Gia nhập câu lạc bộ thành viên thân thiết của Sweet Bakery</p>
+        </div>
+
+        <form action="@Url.Action("DangKy", "TaiKhoan")" method="post">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.HoTen)
+                @Html.TextBoxFor(m => m.HoTen, new { placeholder = "Ví dụ: Lê Thảo Nguyên" })
+                @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "Ví dụ: thaonguyen@gmail.com" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.SoDienThoai)
+                @Html.TextBoxFor(m => m.SoDienThoai, new { placeholder = "Ví dụ: 0987654321" })
+                @Html.ValidationMessageFor(m => m.SoDienThoai, "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.DiaChi)
+                @Html.TextBoxFor(m => m.DiaChi, new { placeholder = "Số nhà, tên đường, phường/xã, quận/huyện..." })
+                @Html.ValidationMessageFor(m => m.DiaChi, "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.MatKhau)
+                @Html.PasswordFor(m => m.MatKhau, new { placeholder = "Tối thiểu 6 ký tự..." })
+                @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-nhap">
+                <label for="xacNhanMatKhau">Nhập lại mật khẩu: *</label>
+                <input type="password" id="xacNhanMatKhau" name="xacNhanMatKhau" placeholder="Xác nhận lại mật khẩu..." required>
+                @Html.ValidationMessage("XacNhanMatKhau", "", new { @class = "loi-nhap" })
+            </div>
+
+            <div class="hang-checkbox-nhap" style="justify-content: flex-start; gap: 8px;">
+                <input type="checkbox" id="dong-y-dieu-khoan" checked required>
+                <label for="dong-y-dieu-khoan">Tôi đồng ý với chính sách & điều khoản thành viên</label>
+            </div>
+
+            <button type="submit" class="nut-bam nut-submit-auth">
+                Tạo Tài Khoản Thành Viên
+            </button>
+        </form>
+
+        <div class="chan-trang-auth">
+            <p>Đã có tài khoản rồi? <a href="@Url.Action("DangNhap", "TaiKhoan")">Đăng Nhập Tại Đây</a></p>
+        </div>
+    </div>
+</main>

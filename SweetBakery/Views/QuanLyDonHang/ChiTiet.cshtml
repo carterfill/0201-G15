@@ -1,0 +1,96 @@
+@model SweetBakery.Models.DonHang
+@{
+    ViewBag.Title = "Đơn Hàng #SB-" + Model.MaDonHang;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string badgeTrangThai = "badge-cho-xac-nhan";
+    string tenTrangThai = "Chờ xác nhận";
+    if (Model.TrangThai == 2)
+    {
+        badgeTrangThai = "badge-dang-lam";
+        tenTrangThai = "Đang làm bánh";
+    }
+    else if (Model.TrangThai == 3)
+    {
+        badgeTrangThai = "badge-dang-giao";
+        tenTrangThai = "Đang giao";
+    }
+    else if (Model.TrangThai == 4)
+    {
+        badgeTrangThai = "badge-da-giao";
+        tenTrangThai = "Đã giao";
+    }
+    else if (Model.TrangThai == 5)
+    {
+        badgeTrangThai = "badge-da-huy";
+        tenTrangThai = "Đã hủy";
+    }
+
+    decimal tamTinh = 0;
+    foreach (var chiTiet in Model.ChiTietDonHangs)
+    {
+        tamTinh += chiTiet.ThanhTien;
+    }
+}
+<div class="admin-header-trang">
+    <h2>📦 Đơn Hàng #SB-@Model.MaDonHang</h2>
+    <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Danh Sách Đơn</a>
+</div>
+
+<div class="admin-khung-thong-tin">
+    <div class="admin-dong-thong-tin"><span>Ngày đặt:</span><strong>@Model.NgayDat.ToString("dd/MM/yyyy HH:mm")</strong></div>
+    <div class="admin-dong-thong-tin"><span>Tài khoản đặt:</span><strong>@Model.NguoiDung.HoTen (@Model.NguoiDung.Email)</strong></div>
+    <div class="admin-dong-thong-tin"><span>Người nhận:</span><strong>@Model.HoTenNguoiNhan - @Model.SoDienThoai</strong></div>
+    <div class="admin-dong-thong-tin"><span>Địa chỉ giao:</span><strong>@Model.DiaChiGiao</strong></div>
+    <div class="admin-dong-thong-tin"><span>Ghi chú:</span><strong>@Model.GhiChu</strong></div>
+    <div class="admin-dong-thong-tin"><span>Thanh toán:</span><strong>@Model.PhuongThucThanhToan (@Model.TrangThaiThanhToan)</strong></div>
+    <div class="admin-dong-thong-tin"><span>Trạng thái hiện tại:</span><span class="badge-trang-thai @badgeTrangThai">@tenTrangThai</span></div>
+</div>
+
+<div class="admin-khung-form" style="margin-top: 20px;">
+    <h3 style="margin-bottom: 12px;">Cập nhật trạng thái đơn hàng:</h3>
+    <form action="@Url.Action("CapNhatTrangThai")" method="post" style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="hidden" name="id" value="@Model.MaDonHang">
+        <button type="submit" name="trangThai" value="2" class="nut-bam nut-bam-nho" disabled="@(Model.TrangThai == 2)">🧑‍🍳 Xác nhận làm bánh</button>
+        <button type="submit" name="trangThai" value="3" class="nut-bam nut-bam-nho" disabled="@(Model.TrangThai == 3)">🚚 Chuyển giao shipper</button>
+        <button type="submit" name="trangThai" value="4" class="nut-bam nut-bam-nho" disabled="@(Model.TrangThai == 4)">✅ Hoàn tất giao hàng</button>
+        @if (Model.TrangThai != 5 && Model.TrangThai != 4)
+        {
+            <button type="submit" name="trangThai" value="5" class="nut-bam nut-bam-nho nut-xoa-admin" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">❌ Hủy đơn</button>
+        }
+    </form>
+</div>
+
+<h3 style="margin: 25px 0 12px;">📋 Danh sách bánh trong đơn:</h3>
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Bánh</th>
+            <th>Đơn Giá</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var chiTiet in Model.ChiTietDonHangs)
+        {
+            <tr>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="~/Content/images/@chiTiet.HinhAnh" alt="@chiTiet.TenSanPham" class="admin-anh-mini">
+                        <strong>@chiTiet.TenSanPham</strong>
+                    </div>
+                </td>
+                <td>@chiTiet.Gia.ToString("N0") đ</td>
+                <td>x@chiTiet.SoLuong</td>
+                <td><strong>@chiTiet.ThanhTien.ToString("N0") đ</strong></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="admin-khung-tong-tien">
+    <div><span>Tạm tính tiền bánh:</span><strong>@tamTinh.ToString("N0") đ</strong></div>
+    <div><span>Phí giao hàng:</span><strong>@Model.PhiShip.ToString("N0") đ</strong></div>
+    <div><span>Khuyến mãi / Giảm giá:</span><strong style="color: var(--danger);">-@Model.GiamGia.ToString("N0") đ</strong></div>
+    <div class="admin-dong-tong"><span>TỔNG THANH TOÁN:</span><span>@Model.TongTien.ToString("N0") đ</span></div>
+</div>

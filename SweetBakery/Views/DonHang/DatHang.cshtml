@@ -1,0 +1,136 @@
+@model SweetBakery.Models.NguoiDung
+@{
+    ViewBag.Title = "Đặt Hàng & Thanh Toán - Sweet Bakery";
+    var dsMon = (List<SweetBakery.Models.MonTrongGio>)ViewBag.DsMon;
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <a href="@Url.Action("Index", "GioHang")">Giỏ Hàng</a>
+        <span class="ngan-cach">/</span>
+        <span>Xác Nhận Đặt Hàng & Thanh Toán</span>
+    </div>
+</div>
+
+<main class="khung-chua" id="khung-trang-checkout">
+    <div class="tieu-de-trang">
+        <h2>Xác Nhận Đặt Bánh & Thanh Toán</h2>
+        <p>Vui lòng điền thông tin người nhận để tiệm bánh giao hàng đúng hẹn nhé!</p>
+    </div>
+
+    <form action="@Url.Action("DatHang", "DonHang")" method="post">
+        <div class="layout-checkout">
+            <div class="khung-thong-tin-giao-hang">
+                <h3 class="tieu-de-khoi-checkout">📍 1. Thông Tin Nhận Bánh</h3>
+
+                <div class="luoi-2-cot-form">
+                    <div class="hang-nhap">
+                        <label>Họ và tên của bạn: *</label>
+                        <input type="text" name="hoTenNguoiNhan" placeholder="Ví dụ: Nguyễn Thị Mai" value="@Model.HoTen" required>
+                    </div>
+                    <div class="hang-nhap">
+                        <label>Số điện thoại nhận bánh: *</label>
+                        <input type="tel" name="soDienThoai" placeholder="Ví dụ: 0912345678" value="@Model.SoDienThoai" required>
+                    </div>
+                </div>
+
+                <div class="hang-nhap">
+                    <label>Địa chỉ Email (Nhận thông báo đơn):</label>
+                    <input type="email" value="@Model.Email" disabled>
+                </div>
+
+                <div class="hang-nhap">
+                    <label>Địa chỉ nhận hàng chi tiết: *</label>
+                    <input type="text" name="diaChiGiao" placeholder="Số nhà, tên đường, phường/xã, quận/huyện..." value="@Model.DiaChi" required>
+                </div>
+
+                <div class="hang-nhap">
+                    <label>Ghi chú cho tiệm bánh:</label>
+                    <textarea name="ghiChu" rows="3" placeholder="Ví dụ: Ghi chữ 'Happy Birthday Lan' lên bánh, lấy thêm nến số 25..."></textarea>
+                </div>
+
+                <h3 class="tieu-de-khoi-checkout" style="margin-top: 25px;">💳 2. Chọn Phương Thức Thanh Toán</h3>
+                <div class="danh-sach-phuong-thuc-tt">
+                    <label class="the-phuong-thuc">
+                        <input type="radio" name="phuongThuc" value="COD" checked>
+                        <span style="font-size: 24px;">💵</span>
+                        <div class="thong-tin-pt">
+                            <strong>Thanh toán tiền mặt khi nhận bánh (COD)</strong>
+                            <span>Kiểm tra bánh tươi ngon trước khi gửi tiền cho shipper</span>
+                        </div>
+                    </label>
+
+                    <label class="the-phuong-thuc">
+                        <input type="radio" name="phuongThuc" value="QR">
+                        <span style="font-size: 24px;">📲</span>
+                        <div class="thong-tin-pt">
+                            <strong>Chuyển khoản QR Ngân Hàng (VietQR / Momo)</strong>
+                            <span>Quét mã QR tự động điền số tài khoản và nội dung đơn</span>
+                        </div>
+                    </label>
+
+                    <label class="the-phuong-thuc">
+                        <input type="radio" name="phuongThuc" value="ATM">
+                        <span style="font-size: 24px;">💳</span>
+                        <div class="thong-tin-pt">
+                            <strong>Thẻ ATM Nội địa / Thẻ quốc tế Visa, Master</strong>
+                            <span>Thanh toán online qua cổng Napas an toàn</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="demo-qr-box">
+                    <p>💡 <em>Khi chọn quét mã QR, shipper hoặc nhân viên tiệm sẽ gửi mã VietQR chính xác để quý khách quét thanh toán nhanh trong 30 giây.</em></p>
+                </div>
+            </div>
+
+            <div class="khung-tom-tat-don-hang">
+                <h3 class="tieu-de-khoi-checkout">🛍️ Tóm Tắt Đơn Bánh</h3>
+
+                <div>
+                    @foreach (var mon in dsMon)
+                    {
+                        <div class="checkout-item">
+                            <img src="~/Content/images/@mon.SanPham.HinhAnh" alt="@mon.SanPham.TenSanPham" class="checkout-item-img">
+                            <div class="checkout-item-info">
+                                <h4>@mon.SanPham.TenSanPham</h4>
+                                <span class="checkout-item-qty">Số lượng: @mon.SoLuong x @(mon.SanPham.Gia.ToString("N0")) đ</span>
+                            </div>
+                            <div class="checkout-item-price">
+                                @(mon.ThanhTien.ToString("N0")) đ
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div style="border-top: 1px solid var(--border-color); padding-top: 15px;">
+                    <div class="dong-tinh-tien-checkout">
+                        <span>Tạm tính tiền bánh:</span>
+                        <strong>@(((decimal)ViewBag.TamTinh).ToString("N0")) đ</strong>
+                    </div>
+                    <div class="dong-tinh-tien-checkout">
+                        <span>Phí giao hàng (Nội thành):</span>
+                        <strong>@(((decimal)ViewBag.PhiShip).ToString("N0")) đ</strong>
+                    </div>
+                    <div class="dong-tinh-tien-checkout">
+                        <span>Khuyến mãi / Giảm giá:</span>
+                        <strong style="color: var(--danger);">-@(((decimal)ViewBag.GiamGia).ToString("N0")) đ</strong>
+                    </div>
+                    <div class="dong-tinh-tien-checkout tong">
+                        <span>TỔNG THANH TOÁN:</span>
+                        <span>@(((decimal)ViewBag.TongTien).ToString("N0")) đ</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="nut-bam nut-lon" style="width: 100%; margin-top: 25px;">
+                    🎉 Xác Nhận Đặt Bánh Ngay
+                </button>
+
+                <p style="text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 14px;">
+                    Bằng việc bấm Đặt Bánh, bạn đồng ý với các điều khoản dịch vụ của Sweet Bakery.
+                </p>
+            </div>
+        </div>
+    </form>
+</main>

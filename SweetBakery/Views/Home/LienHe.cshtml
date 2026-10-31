@@ -1,0 +1,57 @@
+@{
+    ViewBag.Title = "Liên Hệ & Góp Ý - Sweet Bakery";
+}
+<div class="khung-chua">
+    <div class="thanh-dieu-huong-con">
+        <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+        <span class="ngan-cach">/</span>
+        <span>Liên Hệ & Góp Ý</span>
+    </div>
+</div>
+
+<main class="khung-chua">
+    <div class="tieu-de-trang">
+        <h2>Góp Ý & Đặt Bánh Theo Yêu Cầu</h2>
+        <p>Để lại tin nhắn cho tiệm bánh Sweet Bakery hoặc gửi mẫu bánh sinh nhật bạn muốn đặt nhé!</p>
+    </div>
+
+    <div class="luoi-lien-he">
+        <div class="thong-tin-tiem">
+            <h3>🍰 Tiệm Bánh Sweet Bakery</h3>
+            <p>📍 <strong>Địa chỉ tiệm:</strong> 123 Đường Tân Sơn, An Hội Tây, TP. Hồ Chí Minh</p>
+            <p>📞 <strong>Hotline đặt bánh:</strong> 0912.345.678</p>
+            <p>💬 <strong>Zalo tư vấn mẫu:</strong> 0912.345.678 (Hỗ trợ 24/7)</p>
+            <p>✉️ <strong>Email tiệm:</strong> sweetbakery.cskh@@gmail.com</p>
+            <p>⏰ <strong>Giờ mở cửa:</strong> 07:00 - 21:30 (Thứ 2 - Chủ Nhật)</p>
+            <hr>
+            <p class="ghi-chu">
+                💡 <strong>Lưu ý đặt bánh thiết kế riêng:</strong> Để tiệm chuẩn bị chu đáo nhất, quý khách vui lòng gửi mẫu và đặt trước từ 12 - 24 tiếng đối với các dòng bánh sinh nhật nghệ thuật hoặc tiệc cưới.
+            </p>
+        </div>
+
+        <div>
+            <form action="@Url.Action("GuiLienHe", "Home")" method="post" class="form-nhap-lieu form-lien-he">
+                <h3 class="tieu-de-form">Gửi Lời Nhắn Cho Tiệm</h3>
+
+                <div class="hang-nhap">
+                    <label>Họ và tên của bạn: *</label>
+                    <input type="text" name="hoTen" placeholder="Ví dụ: Trần Thị Mai" required>
+                </div>
+
+                <div class="hang-nhap">
+                    <label>Địa chỉ Email: *</label>
+                    <input type="email" name="email" placeholder="Ví dụ: mai&#64;gmail.com" required>
+                </div>
+
+                <div class="hang-nhap">
+                    <label>Nội dung tin nhắn / Yêu cầu bánh chi tiết: *</label>
+                    <textarea name="noiDung" rows="4" placeholder="Nhập lời nhắn, kích thước hoặc yêu cầu đặc biệt của bạn..." required></textarea>
+                </div>
+
+                <button type="submit" class="nut-bam nut-gui-tin nut-lon">
+                    ✉️ Gửi Tin Nhắn Đi
+                </button>
+            </form>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,104 @@
+@model SweetBakery.Models.SanPham
+@{
+    ViewBag.Title = "Sửa Bánh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var danhMucs = (List<SweetBakery.Models.DanhMuc>)ViewBag.DanhMucs;
+}
+<div class="admin-header-trang">
+    <h2>✏️ Sửa Bánh: @Model.TenSanPham</h2>
+</div>
+
+<div class="admin-khung-form">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.MaSanPham)
+        @Html.HiddenFor(m => m.HinhAnh)
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.TenSanPham)
+                @Html.TextBoxFor(m => m.TenSanPham, new { @class = "admin-o-nhap" })
+                @Html.ValidationMessageFor(m => m.TenSanPham, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.MaDanhMuc)
+                @Html.DropDownListFor(m => m.MaDanhMuc, new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc"), "-- Chọn danh mục --", new { @class = "admin-o-nhap" })
+                @Html.ValidationMessageFor(m => m.MaDanhMuc, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Gia)
+                @Html.TextBoxFor(m => m.Gia, new { @class = "admin-o-nhap", type = "number", min = 1000, step = 1000 })
+                @Html.ValidationMessageFor(m => m.Gia, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.GiaGoc)
+                @Html.TextBoxFor(m => m.GiaGoc, new { @class = "admin-o-nhap", type = "number", min = 0, step = 1000 })
+                @Html.ValidationMessageFor(m => m.GiaGoc, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MoTa)
+            @Html.TextAreaFor(m => m.MoTa, new { @class = "admin-o-nhap", rows = 2 })
+            @Html.ValidationMessageFor(m => m.MoTa, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MoTaChiTiet)
+            @Html.TextAreaFor(m => m.MoTaChiTiet, new { @class = "admin-o-nhap", rows = 4 })
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.ThanhPhan)
+                @Html.TextAreaFor(m => m.ThanhPhan, new { @class = "admin-o-nhap", rows = 2 })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.BaoQuan)
+                @Html.TextAreaFor(m => m.BaoQuan, new { @class = "admin-o-nhap", rows = 2 })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.KichThuoc)
+                @Html.TextBoxFor(m => m.KichThuoc, new { @class = "admin-o-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Sao)
+                @Html.DropDownListFor(m => m.Sao, new SelectList(new[] { 1, 2, 3, 4, 5 }), new { @class = "admin-o-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.DaBan)
+                @Html.TextBoxFor(m => m.DaBan, new { @class = "admin-o-nhap", type = "number", min = 0 })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Hot)
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    @Html.CheckBoxFor(m => m.Hot)
+                    <span>Hiện nhãn 🔥 Bán chạy</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hang-nhap">
+            <label>Hình ảnh hiện tại:</label>
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <img src="~/Content/images/@Model.HinhAnh" alt="@Model.TenSanPham" class="admin-anh-mini">
+                <input type="file" name="hinhAnhFile" accept="image/*">
+                <span style="font-size: 12.5px; color: var(--text-muted);">Bỏ trống nếu không muốn đổi hình</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" class="nut-bam">💾 Cập Nhật Bánh</button>
+            <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Quay Lại</a>
+        </div>
+    }
+</div>

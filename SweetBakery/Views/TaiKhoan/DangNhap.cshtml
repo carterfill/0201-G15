@@ -1,0 +1,44 @@
+@{
+    ViewBag.Title = "Đăng Nhập - Sweet Bakery";
+}
+<main class="khung-chua">
+    <div class="khung-auth-chinh">
+        <div class="dau-trang-auth">
+            <span class="logo-auth">🧁</span>
+            <h2>Đăng Nhập Tài Khoản</h2>
+            <p>Đăng nhập để theo dõi đơn bánh và nhận ưu đãi thành viên</p>
+        </div>
+
+        @if (ViewBag.Loi != null)
+        {
+            <div class="khung-loi-auth">⚠️ @ViewBag.Loi</div>
+        }
+
+        <form action="@Url.Action("DangNhap", "TaiKhoan")" method="post">
+            <div class="hang-nhap">
+                <label for="login-email">Email hoặc Số điện thoại:</label>
+                <input type="text" id="login-email" name="email" placeholder="Ví dụ: khachhang&#64;sweetbakery.vn" value="huongmai@gmail.com" required>
+            </div>
+
+            <div class="hang-nhap">
+                <label for="login-password">Mật khẩu:</label>
+                <input type="password" id="login-password" name="matKhau" placeholder="Nhập mật khẩu..." value="123456" required>
+            </div>
+
+            <div class="hang-checkbox-nhap">
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <input type="checkbox" checked> Ghi nhớ đăng nhập
+                </label>
+                <a href="javascript:alert('Chức năng cấp lại mật khẩu: Vui lòng liên hệ hotline 0912.345.678 để được hỗ trợ!')">Quên mật khẩu?</a>
+            </div>
+
+            <button type="submit" class="nut-bam nut-submit-auth">
+                Đăng Nhập Ngay
+            </button>
+        </form>
+
+        <div class="chan-trang-auth">
+            <p>Chưa có tài khoản Sweet Bakery? <a href="@Url.Action("DangKy", "TaiKhoan")">Đăng Ký Thành Viên Ngay</a></p>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,95 @@
+@model List<SweetBakery.Models.SanPham>
+@{
+    ViewBag.Title = "Quản Lý Sản Phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var danhMucs = (List<SweetBakery.Models.DanhMuc>)ViewBag.DanhMucs;
+    string tuKhoa = ViewBag.TuKhoa;
+    int? maDanhMuc = ViewBag.MaDanhMuc;
+    string sapXep = ViewBag.SapXep;
+    int trangHienTai = ViewBag.TrangHienTai;
+    int tongSoTrang = ViewBag.TongSoTrang;
+}
+<div class="admin-header-trang">
+    <h2>🍰 Quản Lý Sản Phẩm Bánh</h2>
+    <a href="@Url.Action("Them")" class="nut-bam">➕ Thêm Bánh Mới</a>
+</div>
+
+<form method="get" action="@Url.Action("Index")" class="admin-thanh-cong-cu">
+    <input type="text" name="tuKhoa" value="@tuKhoa" placeholder="🔍 Tìm theo tên bánh..." class="admin-o-nhap" style="flex: 1;">
+    <select name="maDanhMuc" class="admin-o-nhap">
+        <option value="">Tất cả danh mục</option>
+        @foreach (var dm in danhMucs)
+        {
+            <option value="@dm.MaDanhMuc" selected="@(maDanhMuc == dm.MaDanhMuc)">@dm.TenDanhMuc</option>
+        }
+    </select>
+    <select name="sapXep" class="admin-o-nhap">
+        <option value="" selected="@(string.IsNullOrEmpty(sapXep))">Mới nhất</option>
+        <option value="ten-az" selected="@(sapXep == "ten-az")">Tên A - Z</option>
+        <option value="ten-za" selected="@(sapXep == "ten-za")">Tên Z - A</option>
+        <option value="gia-tang" selected="@(sapXep == "gia-tang")">Giá tăng dần</option>
+        <option value="gia-giam" selected="@(sapXep == "gia-giam")">Giá giảm dần</option>
+        <option value="ban-chay" selected="@(sapXep == "ban-chay")">Bán chạy nhất</option>
+    </select>
+    <button type="submit" class="nut-bam nut-bam-nho">🔎 Lọc</button>
+    <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu nut-bam-nho">Đặt lại</a>
+</form>
+
+<p style="font-size: 13.5px; color: var(--text-muted); margin: 10px 0 15px;">
+    Tìm thấy <strong>@ViewBag.TongSoSanPham</strong> sản phẩm
+</p>
+
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Hình</th>
+            <th>Tên Bánh</th>
+            <th>Danh Mục</th>
+            <th>Giá Bán</th>
+            <th>Giá Gốc</th>
+            <th>Đã Bán</th>
+            <th style="width: 180px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">Không tìm thấy sản phẩm nào!</td>
+            </tr>
+        }
+        @foreach (var sp in Model)
+        {
+            <tr>
+                <td><img src="~/Content/images/@sp.HinhAnh" alt="@sp.TenSanPham" class="admin-anh-mini"></td>
+                <td>
+                    <strong>@sp.TenSanPham</strong>
+                    @if (sp.Hot)
+                    {
+                        <span class="nhan-hot">🔥</span>
+                    }
+                </td>
+                <td>@sp.DanhMuc.TenDanhMuc</td>
+                <td><strong>@sp.Gia.ToString("N0") đ</strong></td>
+                <td>@(sp.GiaGoc.HasValue ? sp.GiaGoc.Value.ToString("N0") + " đ" : "-")</td>
+                <td>@sp.DaBan</td>
+                <td>
+                    <a href="@Url.Action("Sua", new { id = sp.MaSanPham })" class="nut-bam nut-bam-nho nut-sua">✏️ Sửa</a>
+                    <form action="@Url.Action("Xoa", new { id = sp.MaSanPham })" method="post" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bánh [@sp.TenSanPham] không?');">
+                        <button type="submit" class="nut-bam nut-bam-nho nut-xoa-admin">🗑️ Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (tongSoTrang > 1)
+{
+    <div class="khung-phan-trang">
+        @for (int i = 1; i <= tongSoTrang; i++)
+        {
+            <a href="@Url.Action("Index", new { tuKhoa = tuKhoa, maDanhMuc = maDanhMuc, sapXep = sapXep, trang = i })" class="nut-phan-trang @(i == trangHienTai ? "dang-chon" : "")">@i</a>
+        }
+    </div>
+}
