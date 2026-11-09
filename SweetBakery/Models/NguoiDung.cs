@@ -38,6 +38,6 @@ namespace SweetBakery.Models
         [StringLength(20)]
         public string VaiTro { get; set; }
 
-        public virtual ICollection<DonHang> DonHangs { get; set; }
+        public virtual ICollection<DonHang> DonHangs { get; set; } = new List<DonHang>();
     }
 }

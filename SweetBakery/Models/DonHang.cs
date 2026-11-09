@@ -59,6 +59,6 @@ namespace SweetBakery.Models
         [Display(Name = "Tổng tiền")]
         public decimal TongTien { get; set; }
 
-        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } = new List<ChiTietDonHang>();
     }
 }

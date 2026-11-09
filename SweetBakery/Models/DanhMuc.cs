@@ -21,6 +21,6 @@ namespace SweetBakery.Models
         [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
 
-        public virtual ICollection<SanPham> SanPhams { get; set; }
+        public virtual ICollection<SanPham> SanPhams { get; set; } = new List<SanPham>();
     }
 }
