@@ -19,7 +19,7 @@ namespace SweetBakery.Models
         [StringLength(150)]
         public string TenSanPham { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         public decimal Gia { get; set; }
 
         [StringLength(255)]
@@ -27,7 +27,7 @@ namespace SweetBakery.Models
 
         public int SoLuong { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         public decimal ThanhTien { get; set; }
     }
 }

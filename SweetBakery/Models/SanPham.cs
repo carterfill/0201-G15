@@ -36,12 +36,12 @@ namespace SweetBakery.Models
         public string KichThuoc { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập giá bán")]
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         [Range(1000, 100000000, ErrorMessage = "Giá bán phải từ 1.000 đ đến 100.000.000 đ")]
         [Display(Name = "Giá bán")]
         public decimal Gia { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         [Range(0, 100000000, ErrorMessage = "Giá gốc không hợp lệ")]
         [Display(Name = "Giá gốc")]
         public decimal? GiaGoc { get; set; }

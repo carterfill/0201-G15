@@ -47,15 +47,15 @@ namespace SweetBakery.Models
         [Display(Name = "Trạng thái đơn")]
         public int TrangThai { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         [Display(Name = "Phí giao hàng")]
         public decimal PhiShip { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         [Display(Name = "Giảm giá")]
         public decimal GiamGia { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal")]
         [Display(Name = "Tổng tiền")]
         public decimal TongTien { get; set; }
 
