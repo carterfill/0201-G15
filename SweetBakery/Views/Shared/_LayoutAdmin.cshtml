@@ -14,9 +14,17 @@
     <div class="admin-nav">
         <div class="admin-nav-trai">
             <span class="admin-logo">⚙️ Sweet Bakery - Quản Trị</span>
-            <a href="@Url.Action("Index", "QuanLyDanhMuc")">🗂️ Danh Mục</a>
-            <a href="@Url.Action("Index", "QuanLySanPham")">🍰 Sản Phẩm</a>
+            <a href="@Url.Action("Index", "QuanLyDanhMuc")">🗂️ Quản Lý Danh Mục</a>
+            <div class="admin-menu-gom">
+                <span class="admin-menu-tieu-de">🍰 Quản Lý Hàng Hóa ▾</span>
+                <div class="admin-menu-con">
+                    <a href="@Url.Action("Index", "QuanLySanPham")">Sản Phẩm</a>
+                    <a href="@Url.Action("Index", "QuanLyKhoHang")">Kho Hàng</a>
+                </div>
+            </div>
             <a href="@Url.Action("Index", "QuanLyDonHang")">📦 Đơn Hàng</a>
+            <a href="@Url.Action("Index", "QuanLyNguoiDung")">👤 Người Dùng</a>
+            <a href="@Url.Action("Index", "QuanLyKhachHang")">🧑‍🤝‍🧑 Khách Hàng</a>
             <a href="@Url.Action("Index", "Home")">🌐 Xem Trang Khách</a>
         </div>
         <div class="admin-nav-phai">

@@ -533,6 +533,34 @@ header {
     border-radius: 4px;
 }
 
+.nhan-het-hang {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #6b7280;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.nut-het-hang {
+    opacity: 0.6;
+    cursor: not-allowed;
+    text-align: center;
+}
+
+.hop-het-hang {
+    background-color: #fef2f2;
+    border: 1.5px dashed var(--danger);
+    color: var(--danger);
+    font-weight: 700;
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    margin: 15px 0;
+}
+
 .thong-tin-banh {
     padding: 16px;
     display: flex;

@@ -11,8 +11,19 @@ namespace SweetBakery.Controllers
         public ActionResult Index()
         {
             ViewBag.DanhMucs = db.DanhMucs.OrderBy(d => d.MaDanhMuc).ToList();
-            var banhNoiBat = db.SanPhams.OrderByDescending(s => s.DaBan).Take(8).ToList();
+            var banhNoiBat = db.SanPhams
+                .Where(s => s.SoLuongTon > 0)
+                .OrderByDescending(s => s.DaBan)
+                .Take(8)
+                .ToList();
             return View(banhNoiBat);
+        }
+
+        [ChildActionOnly]
+        public ActionResult DanhMucFooter()
+        {
+            var danhMucs = db.DanhMucs.OrderBy(d => d.MaDanhMuc).ToList();
+            return PartialView(danhMucs);
         }
 
         public ActionResult LienHe()

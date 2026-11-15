@@ -11,7 +11,7 @@ namespace SweetBakery.Controllers
 
         public ActionResult DanhSach(string tuKhoa, int? maDanhMuc, string khoangGia, string sapXep, int? trang)
         {
-            var sanPhams = db.SanPhams.AsQueryable();
+            var sanPhams = db.SanPhams.Where(s => s.SoLuongTon > 0).AsQueryable();
 
             if (!string.IsNullOrEmpty(tuKhoa))
             {

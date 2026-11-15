@@ -54,6 +54,14 @@ namespace SweetBakery.Controllers
 
             var gioHang = LayGioHang();
             var item = gioHang.FirstOrDefault(g => g.MaSanPham == id);
+            int soLuongHienTai = item != null ? item.SoLuong : 0;
+
+            if (soLuongHienTai + soLuong > sanPham.SoLuongTon)
+            {
+                TempData["ThongBao"] = "Chỉ còn " + sanPham.SoLuongTon + " chiếc [" + sanPham.TenSanPham + "] trong kho!";
+                return RedirectToAction("Index", "GioHang");
+            }
+
             if (item != null)
             {
                 item.SoLuong += soLuong;
@@ -77,7 +85,8 @@ namespace SweetBakery.Controllers
         {
             var gioHang = LayGioHang();
             var item = gioHang.FirstOrDefault(g => g.MaSanPham == id);
-            if (item != null)
+            var sanPham = db.SanPhams.Find(id);
+            if (item != null && sanPham != null)
             {
                 if (soLuong < 1)
                 {
@@ -86,6 +95,11 @@ namespace SweetBakery.Controllers
                 if (soLuong > 99)
                 {
                     soLuong = 99;
+                }
+                if (soLuong > sanPham.SoLuongTon)
+                {
+                    soLuong = sanPham.SoLuongTon;
+                    TempData["ThongBao"] = "Số lượng tồn kho của [" + sanPham.TenSanPham + "] chỉ còn " + sanPham.SoLuongTon + "!";
                 }
                 item.SoLuong = soLuong;
             }

@@ -36,6 +36,48 @@
     color: #ffffff;
 }
 
+.admin-menu-gom {
+    position: relative;
+}
+
+.admin-menu-tieu-de {
+    color: #f3e5d8;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.admin-menu-gom:hover .admin-menu-tieu-de {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.admin-menu-con {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+    min-width: 160px;
+    padding: 6px 0;
+    z-index: 100;
+}
+
+.admin-menu-gom:hover .admin-menu-con {
+    display: block;
+}
+
+.admin-menu-con a {
+    display: block;
+    color: var(--text-main) !important;
+    padding: 8px 14px !important;
+    border-radius: 0 !important;
+}
+
 .admin-nav-phai {
     display: flex;
     align-items: center;

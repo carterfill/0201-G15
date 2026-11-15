@@ -71,6 +71,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Size 16cm (4 - 6 người) | Tặng kèm nến, muỗng, dao cắt bánh",
                 Sao = 5,
                 DaBan = 218,
+                SoLuongTon = 15,
                 Hot = true,
                 DanhMuc = dmKem
             };
@@ -87,6 +88,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Trọng lượng 85g / chiếc | Nướng mới 2 mẻ mỗi ngày: 7h00 và 14h00",
                 Sao = 5,
                 DaBan = 540,
+                SoLuongTon = 40,
                 Hot = true,
                 DanhMuc = dmPastry
             };
@@ -103,6 +105,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Hộp 6 chiếc có nơ thắt sang trọng thích hợp làm quà tặng",
                 Sao = 5,
                 DaBan = 185,
+                SoLuongTon = 0,
                 Hot = false,
                 DanhMuc = dmMacaron
             };
@@ -119,6 +122,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Cúp bánh tam giác trọng lượng 120g",
                 Sao = 4,
                 DaBan = 312,
+                SoLuongTon = 25,
                 Hot = true,
                 DanhMuc = dmMousse
             };
@@ -135,6 +139,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Size 18cm (6 - 8 người) | Tặng kèm trọn bộ nến hoa sen và phụ kiện tiệc",
                 Sao = 5,
                 DaBan = 198,
+                SoLuongTon = 10,
                 Hot = true,
                 DanhMuc = dmKem
             };
@@ -151,6 +156,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Hộp thiếc vintage hoặc hộp mica 150g",
                 Sao = 5,
                 DaBan = 420,
+                SoLuongTon = 30,
                 Hot = true,
                 DanhMuc = dmMousse
             };
@@ -167,6 +173,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Trọng lượng 110g / chiếc",
                 Sao = 5,
                 DaBan = 176,
+                SoLuongTon = 20,
                 Hot = false,
                 DanhMuc = dmPastry
             };
@@ -183,6 +190,7 @@ namespace SweetBakery.Models
                 KichThuoc = "Size 16cm (4 - 6 người ăn)",
                 Sao = 5,
                 DaBan = 145,
+                SoLuongTon = 8,
                 Hot = false,
                 DanhMuc = dmKem
             };

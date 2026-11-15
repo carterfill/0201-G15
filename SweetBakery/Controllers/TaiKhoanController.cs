@@ -74,15 +74,68 @@ namespace SweetBakery.Controllers
                 db.NguoiDungs.Add(nguoiDung);
                 db.SaveChanges();
 
-                Session["MaNguoiDung"] = nguoiDung.MaNguoiDung;
-                Session["HoTen"] = nguoiDung.HoTen;
-                Session["VaiTro"] = nguoiDung.VaiTro;
-
-                TempData["ThongBao"] = "Đăng ký thành viên thành công! Chào mừng bạn đến với Sweet Bakery 🎂";
-                return RedirectToAction("Index", "Home");
+                TempData["ThongBao"] = "Đăng ký thành viên thành công! Mời bạn đăng nhập để mua sắm 🎂";
+                return RedirectToAction("DangNhap");
             }
 
             return View(nguoiDung);
+        }
+
+        public ActionResult HoSo()
+        {
+            if (Session["MaNguoiDung"] == null)
+            {
+                return RedirectToAction("DangNhap");
+            }
+
+            var nguoiDung = db.NguoiDungs.Find((int)Session["MaNguoiDung"]);
+            if (nguoiDung == null)
+            {
+                Session.Clear();
+                return RedirectToAction("DangNhap");
+            }
+            return View(nguoiDung);
+        }
+
+        [HttpPost]
+        public ActionResult HoSo(string hoTen, string soDienThoai, string diaChi, string matKhauMoi)
+        {
+            if (Session["MaNguoiDung"] == null)
+            {
+                return RedirectToAction("DangNhap");
+            }
+
+            var nguoiDung = db.NguoiDungs.Find((int)Session["MaNguoiDung"]);
+            if (nguoiDung == null)
+            {
+                Session.Clear();
+                return RedirectToAction("DangNhap");
+            }
+
+            if (string.IsNullOrEmpty(hoTen))
+            {
+                ViewBag.Loi = "Vui lòng nhập họ và tên!";
+                return View(nguoiDung);
+            }
+
+            if (!string.IsNullOrEmpty(matKhauMoi) && matKhauMoi.Length < 6)
+            {
+                ViewBag.Loi = "Mật khẩu mới phải có ít nhất 6 ký tự!";
+                return View(nguoiDung);
+            }
+
+            nguoiDung.HoTen = hoTen;
+            nguoiDung.SoDienThoai = soDienThoai;
+            nguoiDung.DiaChi = diaChi;
+            if (!string.IsNullOrEmpty(matKhauMoi))
+            {
+                nguoiDung.MatKhau = BaoMat.BamMatKhau(matKhauMoi);
+            }
+            db.SaveChanges();
+
+            Session["HoTen"] = nguoiDung.HoTen;
+            TempData["ThongBao"] = "Đã cập nhật hồ sơ thành công!";
+            return RedirectToAction("HoSo");
         }
 
         public ActionResult DangXuat()

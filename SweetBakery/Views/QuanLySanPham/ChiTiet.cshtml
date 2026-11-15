@@ -1,0 +1,14 @@
+@model SweetBakery.Models.SanPham
+@{
+    ViewBag.Title = "Chi Tiết Bánh: " + Model.TenSanPham;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-header-trang">
+    <h2>🍰 Chi Tiết Bánh</h2>
+    <div style="display: flex; gap: 10px;">
+        <a href="@Url.Action("Sua", new { id = Model.MaSanPham })" class="nut-bam nut-bam-nho nut-sua">✏️ Sửa Bánh</a>
+        <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Danh Sách Bánh</a>
+    </div>
+</div>
+
+@Html.Partial("_ChiTietSanPham", Model, new ViewDataDictionary(ViewData) { ["ChoPhepMua"] = false })

@@ -10,7 +10,11 @@
             var phanTram = (int)Math.Round((1 - Model.Gia / Model.GiaGoc.Value) * 100);
             <span class="nhan-giam-gia">-@phanTram%</span>
         }
-        @if (Model.Hot)
+        @if (Model.SoLuongTon == 0)
+        {
+            <span class="nhan-het-hang">Hết hàng</span>
+        }
+        else if (Model.Hot)
         {
             <span class="nhan-hot">🔥 Bán chạy</span>
         }
@@ -32,11 +36,18 @@
         </div>
         <div class="nhom-nut-the">
             <a href="@Url.Action("ChiTiet", "SanPham", new { id = Model.MaSanPham })" class="nut-xem-chi-tiet">Chi Tiết</a>
-            <form action="@Url.Action("Them", "GioHang")" method="post" style="margin: 0;">
-                <input type="hidden" name="id" value="@Model.MaSanPham">
-                <input type="hidden" name="soLuong" value="1">
-                <button type="submit" class="nut-bam nut-them-nhanh"><span>🛒 Thêm Giỏ</span></button>
-            </form>
+            @if (Model.SoLuongTon > 0)
+            {
+                <form action="@Url.Action("Them", "GioHang")" method="post" style="margin: 0;">
+                    <input type="hidden" name="id" value="@Model.MaSanPham">
+                    <input type="hidden" name="soLuong" value="1">
+                    <button type="submit" class="nut-bam nut-them-nhanh"><span>🛒 Thêm Giỏ</span></button>
+                </form>
+            }
+            else
+            {
+                <span class="nut-bam nut-them-nhanh nut-het-hang"><span>⛔ Hết Hàng</span></span>
+            }
         </div>
     </div>
 </div>

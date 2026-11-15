@@ -57,6 +57,10 @@ namespace SweetBakery.Models
         [Display(Name = "Đã bán")]
         public int DaBan { get; set; }
 
+        [Display(Name = "Số lượng tồn")]
+        [Range(0, int.MaxValue, ErrorMessage = "Số lượng tồn không hợp lệ")]
+        public int SoLuongTon { get; set; }
+
         [Display(Name = "Bán chạy")]
         public bool Hot { get; set; }
 

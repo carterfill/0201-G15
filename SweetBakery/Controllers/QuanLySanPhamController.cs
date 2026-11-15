@@ -87,6 +87,25 @@ namespace SweetBakery.Controllers
             return View(ketQua);
         }
 
+        public ActionResult ChiTiet(int? id)
+        {
+            if (!LaAdmin())
+            {
+                return RedirectToAction("DangNhap", "TaiKhoan");
+            }
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var sanPham = db.SanPhams.Find(id.Value);
+            if (sanPham == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sanPham);
+        }
+
         public ActionResult Them()
         {
             if (!LaAdmin())

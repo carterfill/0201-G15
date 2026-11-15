@@ -1,0 +1,49 @@
+@model SweetBakery.Models.NguoiDung
+@{
+    ViewBag.Title = "Thêm Quản Trị Viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-header-trang">
+    <h2>➕ Thêm Tài Khoản Quản Trị</h2>
+</div>
+
+<div class="admin-khung-form">
+    @using (Html.BeginForm())
+    {
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.HoTen)
+                @Html.TextBoxFor(m => m.HoTen, new { @class = "admin-o-nhap", placeholder = "Ví dụ: Nguyễn Thị Mai" })
+                @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "admin-o-nhap", placeholder = "Ví dụ: mai@sweetbakery.vn" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.SoDienThoai)
+                @Html.TextBoxFor(m => m.SoDienThoai, new { @class = "admin-o-nhap", placeholder = "Ví dụ: 0912345678" })
+                @Html.ValidationMessageFor(m => m.SoDienThoai, "", new { @class = "loi-nhap" })
+            </div>
+            <div class="hang-nhap">
+                @Html.LabelFor(m => m.DiaChi)
+                @Html.TextBoxFor(m => m.DiaChi, new { @class = "admin-o-nhap", placeholder = "Số nhà, tên đường, phường/xã, quận/huyện..." })
+            </div>
+        </div>
+
+        <div class="hang-nhap">
+            @Html.LabelFor(m => m.MatKhau)
+            @Html.PasswordFor(m => m.MatKhau, new { @class = "admin-o-nhap", placeholder = "Tối thiểu 6 ký tự..." })
+            @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "loi-nhap" })
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" class="nut-bam">💾 Lưu Tài Khoản</button>
+            <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Quay Lại</a>
+        </div>
+    }
+</div>

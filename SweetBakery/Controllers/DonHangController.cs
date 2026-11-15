@@ -120,6 +120,16 @@ namespace SweetBakery.Controllers
             }
 
             int maNguoiDung = (int)Session["MaNguoiDung"];
+
+            foreach (var mon in dsMon)
+            {
+                if (mon.SanPham.SoLuongTon < mon.SoLuong)
+                {
+                    TempData["ThongBao"] = "Số lượng [" + mon.SanPham.TenSanPham + "] trong kho không đủ, chỉ còn " + mon.SanPham.SoLuongTon + " chiếc. Vui lòng kiểm tra lại giỏ hàng!";
+                    return RedirectToAction("Index", "GioHang");
+                }
+            }
+
             decimal tongTien = TinhTien(dsMon);
 
             string tenPhuongThuc = "Tiền mặt khi nhận bánh (COD)";
@@ -155,6 +165,9 @@ namespace SweetBakery.Controllers
 
             foreach (var mon in dsMon)
             {
+                mon.SanPham.SoLuongTon -= mon.SoLuong;
+                mon.SanPham.DaBan += mon.SoLuong;
+
                 var chiTiet = new ChiTietDonHang
                 {
                     MaDonHang = donHang.MaDonHang,

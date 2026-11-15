@@ -1,0 +1,37 @@
+@model SweetBakery.Models.NguoiDung
+@{
+    ViewBag.Title = "Chi Tiết Khách Hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var donHangs = (List<SweetBakery.Models.DonHang>)ViewBag.DonHangs;
+    decimal tongTienTatCa = 0;
+    foreach (var dh in donHangs)
+    {
+        if (dh.TrangThai != 5)
+        {
+            tongTienTatCa += dh.TongTien;
+        }
+    }
+}
+<div class="admin-header-trang">
+    <h2>🧑 Khách Hàng: @Model.HoTen</h2>
+    <a href="@Url.Action("Index")" class="nut-bam nut-bam-phu">&larr; Danh Sách Khách Hàng</a>
+</div>
+
+<div class="admin-khung-thong-tin">
+    <div class="admin-dong-thong-tin"><span>Mã khách hàng:</span><strong>KH-@Model.MaNguoiDung</strong></div>
+    <div class="admin-dong-thong-tin"><span>Họ và tên:</span><strong>@Model.HoTen</strong></div>
+    <div class="admin-dong-thong-tin"><span>Email:</span><strong>@Model.Email</strong></div>
+    <div class="admin-dong-thong-tin"><span>Số điện thoại:</span><strong>@Model.SoDienThoai</strong></div>
+    <div class="admin-dong-thong-tin"><span>Địa chỉ:</span><strong>@Model.DiaChi</strong></div>
+    <div class="admin-dong-thong-tin"><span>Số đơn đã đặt:</span><strong>@donHangs.Count đơn (tổng @tongTienTatCa.ToString("N0") đ)</strong></div>
+</div>
+
+<h3 style="margin: 25px 0 12px;">📋 Danh Sách Đơn Hàng Của Khách</h3>
+@if (donHangs.Count == 0)
+{
+    <p style="padding: 15px 0; color: var(--text-muted);">Khách hàng này chưa có đơn hàng nào.</p>
+}
+else
+{
+    @Html.Partial("_DanhSachDonHang", donHangs)
+}

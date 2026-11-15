@@ -1,0 +1,79 @@
+@{
+    ViewBag.Title = "Quản Lý Kho Hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var danhSachTon = (List<SweetBakery.Models.SanPham>)ViewBag.DanhSachTon;
+    var danhSachCanNhap = (List<SweetBakery.Models.SanPham>)ViewBag.DanhSachCanNhap;
+}
+<div class="admin-header-trang">
+    <h2>🏬 Quản Lý Kho Hàng</h2>
+</div>
+
+<h3 style="margin: 20px 0 12px;">📦 Danh Sách Hàng Tồn (@danhSachTon món)</h3>
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Hình</th>
+            <th>Tên Bánh</th>
+            <th>Danh Mục</th>
+            <th>Giá Bán</th>
+            <th>Số Lượng Tồn</th>
+            <th>Đã Bán</th>
+            <th style="width: 120px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (danhSachTon.Count == 0)
+        {
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">Không có hàng tồn nào!</td>
+            </tr>
+        }
+        @foreach (var sp in danhSachTon)
+        {
+            <tr>
+                <td><img src="~/Content/images/@sp.HinhAnh" alt="@sp.TenSanPham" class="admin-anh-mini"></td>
+                <td><strong>@sp.TenSanPham</strong></td>
+                <td>@sp.DanhMuc.TenDanhMuc</td>
+                <td>@sp.Gia.ToString("N0") đ</td>
+                <td><span class="admin-so-luong">@sp.SoLuongTon</span></td>
+                <td>@sp.DaBan</td>
+                <td><a href="@Url.Action("Sua", "QuanLySanPham", new { id = sp.MaSanPham })" class="nut-bam nut-bam-nho nut-sua">✏️ Nhập Thêm</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 style="margin: 30px 0 12px;">🛒 Danh Sách Hàng Cần Nhập (@danhSachCanNhap món)</h3>
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Hình</th>
+            <th>Tên Bánh</th>
+            <th>Danh Mục</th>
+            <th>Giá Bán</th>
+            <th>Số Lượng Tồn</th>
+            <th>Đã Bán</th>
+            <th style="width: 120px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (danhSachCanNhap.Count == 0)
+        {
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">Tất cả món bánh đều còn hàng!</td>
+            </tr>
+        }
+        @foreach (var sp in danhSachCanNhap)
+        {
+            <tr>
+                <td><img src="~/Content/images/@sp.HinhAnh" alt="@sp.TenSanPham" class="admin-anh-mini"></td>
+                <td><strong>@sp.TenSanPham</strong></td>
+                <td>@sp.DanhMuc.TenDanhMuc</td>
+                <td>@sp.Gia.ToString("N0") đ</td>
+                <td><span class="admin-so-luong">0</span></td>
+                <td>@sp.DaBan</td>
+                <td><a href="@Url.Action("Sua", "QuanLySanPham", new { id = sp.MaSanPham })" class="nut-bam nut-bam-nho nut-sua">✏️ Nhập Hàng</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

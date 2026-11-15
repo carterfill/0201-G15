@@ -35,6 +35,7 @@
                 {
                     <div class="user-logged-in">
                         <span class="user-greeting">👋 Chào, <strong>@hoTen</strong></span>
+                        <a href="@Url.Action("HoSo", "TaiKhoan")" class="user-link">Hồ Sơ</a>
                         <a href="@Url.Action("LichSu", "DonHang")" class="user-link">Lịch Sử Mua Hàng</a>
                         @if (vaiTro == "admin")
                         {
@@ -92,10 +93,7 @@
                 <div class="cot-footer">
                     <h3>Danh Mục Bánh</h3>
                     <ul class="danh-sach-link-footer">
-                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 1 })">Bánh Kem Sinh Nhật</a></li>
-                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 2 })">Bánh Mì Sừng Bò Croissant</a></li>
-                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 3 })">Bánh Mousse & Tiramisu</a></li>
-                        <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = 4 })">Macaron Cầu Vồng</a></li>
+                        @Html.Action("DanhMucFooter", "Home")
                         <li><a href="@Url.Action("DanhSach", "SanPham")">Tất Cả Sản Phẩm</a></li>
                     </ul>
                 </div>

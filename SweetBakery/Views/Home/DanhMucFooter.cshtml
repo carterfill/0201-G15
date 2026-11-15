@@ -1,0 +1,5 @@
+@model List<SweetBakery.Models.DanhMuc>
+@foreach (var dm in Model)
+{
+    <li><a href="@Url.Action("DanhSach", "SanPham", new { maDanhMuc = dm.MaDanhMuc })">@dm.TenDanhMuc</a></li>
+}

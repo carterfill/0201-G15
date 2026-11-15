@@ -1,0 +1,53 @@
+@model SweetBakery.Models.NguoiDung
+@{
+    ViewBag.Title = "Hồ Sơ Khách Hàng - Sweet Bakery";
+}
+<main class="khung-chua">
+    <div class="khung-auth-chinh">
+        <div class="dau-trang-auth">
+            <span class="logo-auth">🧑</span>
+            <h2>Hồ Sơ Của Tôi</h2>
+            <p>Cập nhật thông tin cá nhân để nhận bánh nhanh chóng và chính xác hơn</p>
+        </div>
+
+        @if (ViewBag.Loi != null)
+        {
+            <div class="khung-loi-auth">⚠️ @ViewBag.Loi</div>
+        }
+
+        <form action="@Url.Action("HoSo", "TaiKhoan")" method="post">
+            <div class="hang-nhap">
+                <label>Email tài khoản:</label>
+                <input type="email" value="@Model.Email" disabled>
+            </div>
+
+            <div class="hang-nhap">
+                <label for="hoTen">Họ và tên: *</label>
+                <input type="text" id="hoTen" name="hoTen" value="@Model.HoTen" required>
+            </div>
+
+            <div class="hang-nhap">
+                <label for="soDienThoai">Số điện thoại:</label>
+                <input type="tel" id="soDienThoai" name="soDienThoai" value="@Model.SoDienThoai" placeholder="Ví dụ: 0987654321">
+            </div>
+
+            <div class="hang-nhap">
+                <label for="diaChi">Địa chỉ nhận hàng:</label>
+                <input type="text" id="diaChi" name="diaChi" value="@Model.DiaChi" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
+            </div>
+
+            <div class="hang-nhap">
+                <label for="matKhauMoi">Mật khẩu mới (bỏ trống nếu không đổi):</label>
+                <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Tối thiểu 6 ký tự...">
+            </div>
+
+            <button type="submit" class="nut-bam nut-submit-auth">
+                💾 Lưu Thay Đổi
+            </button>
+        </form>
+
+        <div class="chan-trang-auth">
+            <p><a href="@Url.Action("LichSu", "DonHang")">Xem Lịch Sử Mua Hàng &rarr;</a></p>
+        </div>
+    </div>
+</main>

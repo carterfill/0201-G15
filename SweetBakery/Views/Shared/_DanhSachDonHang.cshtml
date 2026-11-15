@@ -1,0 +1,50 @@
+@model List<SweetBakery.Models.DonHang>
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Mã Đơn</th>
+            <th>Ngày Đặt</th>
+            <th>Người Nhận</th>
+            <th>SĐT</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th style="width: 120px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dh in Model)
+        {
+            string badgeTrangThai = "badge-cho-xac-nhan";
+            string tenTrangThai = "Chờ xác nhận";
+            if (dh.TrangThai == 2)
+            {
+                badgeTrangThai = "badge-dang-lam";
+                tenTrangThai = "Đang làm bánh";
+            }
+            else if (dh.TrangThai == 3)
+            {
+                badgeTrangThai = "badge-dang-giao";
+                tenTrangThai = "Đang giao";
+            }
+            else if (dh.TrangThai == 4)
+            {
+                badgeTrangThai = "badge-da-giao";
+                tenTrangThai = "Đã giao";
+            }
+            else if (dh.TrangThai == 5)
+            {
+                badgeTrangThai = "badge-da-huy";
+                tenTrangThai = "Đã hủy";
+            }
+            <tr>
+                <td><strong>#SB-@dh.MaDonHang</strong></td>
+                <td>@dh.NgayDat.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@dh.HoTenNguoiNhan</td>
+                <td>@dh.SoDienThoai</td>
+                <td><strong>@dh.TongTien.ToString("N0") đ</strong></td>
+                <td><span class="badge-trang-thai @badgeTrangThai">@tenTrangThai</span></td>
+                <td><a href="@Url.Action("ChiTiet", "QuanLyDonHang", new { id = dh.MaDonHang })" class="nut-bam nut-bam-nho nut-sua">👁️ Xem</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

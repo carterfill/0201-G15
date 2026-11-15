@@ -1,0 +1,40 @@
+@model List<SweetBakery.Models.NguoiDung>
+@{
+    ViewBag.Title = "Quản Lý Người Dùng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-header-trang">
+    <h2>👤 Quản Lý Người Quản Trị</h2>
+    <a href="@Url.Action("Them")" class="nut-bam">➕ Thêm Quản Trị Viên</a>
+</div>
+
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Họ Tên</th>
+            <th>Email</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th style="width: 180px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nd in Model)
+        {
+            <tr>
+                <td>@nd.MaNguoiDung</td>
+                <td><strong>@nd.HoTen</strong></td>
+                <td>@nd.Email</td>
+                <td>@nd.SoDienThoai</td>
+                <td>@nd.DiaChi</td>
+                <td>
+                    <a href="@Url.Action("Sua", new { id = nd.MaNguoiDung })" class="nut-bam nut-bam-nho nut-sua">✏️ Sửa</a>
+                    <form action="@Url.Action("Xoa", new { id = nd.MaNguoiDung })" method="post" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tài khoản [@nd.HoTen] không?');">
+                        <button type="submit" class="nut-bam nut-bam-nho nut-xoa-admin">🗑️ Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

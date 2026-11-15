@@ -1,0 +1,41 @@
+@model List<SweetBakery.Models.NguoiDung>
+@{
+    ViewBag.Title = "Quản Lý Khách Hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-header-trang">
+    <h2>🧑‍🤝‍🧑 Quản Lý Khách Hàng</h2>
+    <span style="font-size: 13.5px; color: var(--text-muted);">Danh sách chỉ xem, khách tự đăng ký tài khoản</span>
+</div>
+
+<table class="admin-bang">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Họ Tên</th>
+            <th>Email</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th style="width: 120px;">Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 25px; color: var(--text-muted);">Chưa có khách hàng nào đăng ký!</td>
+            </tr>
+        }
+        @foreach (var kh in Model)
+        {
+            <tr>
+                <td>@kh.MaNguoiDung</td>
+                <td><strong>@kh.HoTen</strong></td>
+                <td>@kh.Email</td>
+                <td>@kh.SoDienThoai</td>
+                <td>@kh.DiaChi</td>
+                <td><a href="@Url.Action("ChiTiet", new { id = kh.MaNguoiDung })" class="nut-bam nut-bam-nho nut-sua">👁️ Chi Tiết</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

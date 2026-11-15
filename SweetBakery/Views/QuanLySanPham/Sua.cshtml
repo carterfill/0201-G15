@@ -79,6 +79,14 @@
                 @Html.TextBoxFor(m => m.DaBan, new { @class = "admin-o-nhap", type = "number", min = 0 })
             </div>
             <div class="hang-nhap">
+                @Html.LabelFor(m => m.SoLuongTon)
+                @Html.TextBoxFor(m => m.SoLuongTon, new { @class = "admin-o-nhap", type = "number", min = 0 })
+                @Html.ValidationMessageFor(m => m.SoLuongTon, "", new { @class = "loi-nhap" })
+            </div>
+        </div>
+
+        <div class="luoi-2-cot-form">
+            <div class="hang-nhap">
                 @Html.LabelFor(m => m.Hot)
                 <div style="display: flex; align-items: center; gap: 8px;">
                     @Html.CheckBoxFor(m => m.Hot)
